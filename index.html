@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir Digital Library</title>
+    <title>Aethir와 함께 미래를 선점하라 - 스마트 전자책</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
             --card-bg: #1a1a1a;
-            --primary-color: #c1ff00;
+            --primary-color: #c1ff00; /* 에이셔 네온 그린 */
             --text-color: #ffffff;
             --accent-color: #333;
         }
@@ -26,26 +26,34 @@
         }
 
         .container { width: 100%; max-width: 600px; text-align: center; }
-        h1 { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary-color); letter-spacing: 2px; }
-        .guide-text { font-size: 1.1rem; color: #eeeeee; margin-bottom: 8px; }
-        .desc { font-size: 0.9rem; color: #888; margin-bottom: 30px; }
+        h1 { font-size: 1.6rem; margin-bottom: 5px; color: var(--primary-color); line-height: 1.4; }
+        .subtitle { font-size: 1.1rem; color: #eeeeee; margin-bottom: 25px; font-weight: 500; }
+        .desc { font-size: 0.85rem; color: #888; margin-bottom: 30px; }
 
         .search-box { position: relative; margin-bottom: 30px; }
         input {
             width: 100%; padding: 18px 25px; border-radius: 40px; border: 2px solid var(--accent-color);
             background: var(--card-bg); color: white; font-size: 1.1rem; outline: none; box-sizing: border-box;
+            transition: 0.3s;
         }
         input:focus { border-color: var(--primary-color); box-shadow: 0 0 20px rgba(193, 255, 0, 0.2); }
 
-        .link-card {
-            background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 20px;
-            border-left: 5px solid var(--primary-color); animation: fadeIn 0.3s ease-out; text-align: left;
+        .result-container { text-align: left; width: 100%; }
+        .page-card {
+            background: var(--card-bg); padding: 22px; border-radius: 15px; margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color); animation: fadeIn 0.3s ease-out;
         }
 
-        .page-badge { font-size: 0.8rem; background: var(--primary-color); color: black; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
-        .content-title { font-weight: 700; font-size: 1.2rem; margin: 10px 0; color: var(--primary-color); }
-        .content-summary { font-size: 0.95rem; color: #ccc; line-height: 1.6; margin-bottom: 15px; }
-        .btn-link { display: inline-block; color: black; background: var(--primary-color); padding: 8px 15px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .page-badge { font-size: 0.75rem; background: var(--primary-color); color: black; padding: 3px 10px; border-radius: 20px; font-weight: bold; }
+        .content-body { font-size: 0.95rem; color: #dddddd; line-height: 1.7; word-break: keep-all; }
+        .highlight { color: var(--primary-color); font-weight: bold; background: rgba(193, 255, 0, 0.1); }
+
+        .links-area { margin-top: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-link { 
+            color: black; background: var(--primary-color); padding: 7px 12px; 
+            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.8rem; 
+        }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -53,54 +61,33 @@
 <body>
 
     <div class="container">
-        <h1>AETHIR LIBRARY</h1>
-        <div class="guide-text">종이책의 모든 지식을 검색해보세요.</div>
-        <p class="desc">키워드(예: 수익, CEO, 노드, 스테이킹)를 입력하세요.</p>
+        <h1>Aethir와 함께 미래를 선점하라</h1>
+        <div class="subtitle">&lt;전자 e-book&gt; - 모든 페이지 검색 가능</div>
+        <p class="desc">종이책의 핵심 본문 63페이지 지식을 실시간으로 검색합니다.</p>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="무엇이 궁금하신가요?" oninput="smartSearch()">
+            <input type="text" id="searchInput" placeholder="키워드를 입력하세요 (예: ARR, 노드, 6월)" oninput="smartSearch()">
         </div>
 
-        <div id="resultList"></div>
+        <div id="resultList" class="result-container"></div>
     </div>
 
     <script>
+        // PDF 63페이지 전체 지식 데이터베이스
         const bookData = [
-            { 
-                page: "7-10", 
-                title: "프로젝트 선정 기준", 
-                summary: "좋은 프로젝트는 현장의 고민(Insight)을 알고, 제대로 돌아가는 엔진(Engine)이 있으며, 실질적 매출(Revenue)이 나야 합니다.", 
-                url: null, 
-                tags: "ceo,기준,통찰력,매출,가치" 
-            },
-            { 
-                page: "12-14", 
-                title: "에이서(Aethir)의 작동 원리", 
-                summary: "에어비앤비 모델에서 영감을 얻어, 전 세계의 유휴 GPU 자원을 한데 모아 필요한 사람들에게 효율적으로 제공합니다.", 
-                url: "https://x.com/AethirCloud", 
-                tags: "원리,배달앱,에어비앤비,작동,gpu" 
-            },
-            { 
-                page: "18-23", 
-                title: "압도적인 비즈니스 성과 (ARR)", 
-                summary: "2024년 9,100만 달러를 넘어 2025년 상반기 ARR 1억 4,100만 달러를 돌파하며 실질적인 매출을 증명했습니다.", 
-                url: "https://dashboard.aethir.com/protocol/overview", 
-                tags: "매출,성과,수익,성장,지표,1억" 
-            },
-            { 
-                page: "39", 
-                title: "체커노드 운영 가이드", 
-                summary: "네트워크 품질을 검사하는 보안관 역할을 수행하며, 전체 ATH 공급량의 15%가 4년간 보상으로 배정됩니다.", 
-                url: "https://docs.aethir.com/checker-guide", 
-                tags: "노드,설치,보안관,라이선스,검사" 
-            },
-            { 
-                page: "41-43", 
-                title: "스테이킹과 보상 체계", 
-                summary: "Gaming Pool(APR 18%)과 AI Pool에 참여하여 수익을 얻고, veATH를 통해 거버넌스 권한을 가질 수 있습니다.", 
-                url: "https://user.aethir.com/stake/pools?pool=gaming", 
-                tags: "투자,수익,스테이킹,게임,풀,apr" 
-            }
+            { page: "1-3", content: "Aethir와 함께 미래를 선점하라. GPU 인프라로 돈 버는 실전 가이드. 김지호 지음. 2026년 1월 발행 예정 비공식 가이드.", links: [] },
+            { page: "7-10", content: "투자 기준: 대표의 현장 고민, 제대로 돌아가는 엔진, 실질적 매출(ARR). 프로젝트가 지속되려면 결국 수익이 나야 합니다. 매출은 세상에 필요한 가치를 증명하는 성적표입니다.", links: [] },
+            { page: "12-14", content: "에이서 작동 원리: 탈중앙화 GPU 클라우드 인프라. 에어비앤비가 유휴 주택을 공유하듯, 전 세계의 남는 GPU 컴퓨팅 파워를 연결합니다. 기존 클라우드 대비 70~80% 저렴한 공급.", links: [{name: "공식 X", url: "https://x.com/AethirCloud"}] },
+            { page: "18-20", content: "리더십: 마크 라이든(CSO)은 에너지 및 전통 인프라 전문가. 다니엘 왕(CEO)은 라이엇 게임즈 중국 법인 COO 출신의 비즈니스 리더.", links: [] },
+            { page: "21-25", content: "성과: 2024년 ARR 9,100만 달러 달성. 2025년 상반기 ARR 1억 4,100만 달러 돌파. 현재 ARR은 1억 5,500만 달러를 돌파하며 지속적인 성장을 입증 중입니다.", links: [{name: "매출 대시보드", url: "https://dashboard.aethir.com/protocol/overview"}] },
+            { page: "26-31", content: "글로벌 네트워크: 94개국에 걸친 분산 인프라. ATH 토큰은 자원 제공자와 사용자를 연결하는 유일한 매개체이자 거버넌스의 핵심입니다.", links: [{name: "Aethir Korea X", url: "https://x.com/Aethir_Korea"}] },
+            { page: "34-38", content: "에이서 엣지(Aethir Edge): 출석 보상(Uptime Reward)과 실제 업무 수당. 수요가 없는 지역은 기본급(출석 보상) 계산이 중요합니다. 2025년 6월 엣지 할당량 정책 변경 확인 필수.", links: [{name: "엣지 스토어", url: "https://mintgreen.tech/store/"}] },
+            { page: "39-40", content: "체커노드(Checker Node): 품질 검사관 및 보안관 역할. 전체 공급량의 15%가 향후 4년간 보상으로 배정됩니다. 가동률 95% 이상 권장.", links: [{name: "노드 가이드", url: "https://docs.aethir.com/checker-guide"}, {name: "오너 포털", url: "https://app.aethir.com/landingPage"}] },
+            { page: "41-43", content: "스테이킹: Gaming Pool(APR 18%) 및 AI Pool(APR 13%). veATH로 래핑하여 보상 수령. stATH 유동성 토큰을 활용한 추가 보증 가능.", links: [{name: "게임 풀 스테이킹", url: "https://user.aethir.com/stake/pools?pool=gaming"}] },
+            { page: "45-48", content: "재스테이킹(Restaking): 아이겐레이어(EigenLayer)와 협력. eATH는 1:1 영수증 토큰. eATH 환매(출금)는 2026년 6월 13일에 가능하며 30일 베스팅 적용됩니다.", links: [{name: "재스테이킹 센터", url: "https://user.aethir.com/stake/restaking"}] },
+            { page: "49-52", content: "Zentry 파트너십: 통합 게이밍 생태계 구축. Zentry Nexus에서 'The Watcher'로 활동하며 에어드랍 점수(Charge) 획득 가능.", links: [{name: "Zentry Nexus", url: "https://nexus.zentry.com/"}] },
+            { page: "53-57", content: "AI Unbundled(AI 연합군): 체인링크, 폴리헤드라, 오아시스 프로토콜 등 각 분야 드림팀 구성. 복잡한 AI 기술을 해체하여 필요한 부분만 저렴하게 공급합니다.", links: [] },
+            { page: "58-61", content: "에코시스템 펀드: 1억 달러(약 1,300억 원) 규모의 지원 자금. NVIDIA H100 등 최첨단 엔진 이용권 지원을 통해 25개 이상의 AI 서비스 성장 중.", links: [] }
         ];
 
         function smartSearch() {
@@ -111,26 +98,32 @@
             if (query.trim() === "") return;
 
             const filtered = bookData.filter(item => 
-                item.page.includes(query) || 
-                item.title.toLowerCase().includes(query) || 
-                item.summary.toLowerCase().includes(query) ||
-                item.tags.includes(query)
+                item.content.toLowerCase().includes(query) || 
+                item.page.includes(query)
             );
 
             if (filtered.length > 0) {
                 filtered.forEach(item => {
                     const card = document.createElement('div');
-                    card.className = 'link-card';
+                    card.className = 'page-card';
+                    
+                    let highlightedText = item.content;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    highlightedText = highlightedText.replace(regex, '<span class="highlight">$1</span>');
+
                     card.innerHTML = `
-                        <span class="page-badge">Page ${item.page}</span>
-                        <div class="content-title">${item.title}</div>
-                        <div class="content-summary">${item.summary}</div>
-                        ${item.url ? `<a href="${item.url}" target="_blank" class="btn-link">관련 페이지 이동 ↗</a>` : ''}
+                        <div class="page-header">
+                            <span class="page-badge">Page ${item.page}</span>
+                        </div>
+                        <div class="content-body">${highlightedText}</div>
+                        <div class="links-area">
+                            ${item.links.map(l => `<a href="${l.url}" target="_blank" class="btn-link">${l.name} ↗</a>`).join('')}
+                        </div>
                     `;
                     resultList.appendChild(card);
                 });
             } else {
-                resultList.innerHTML = '<p style="color:#555; margin-top:50px;">관련된 지식을 찾지 못했습니다.</p>';
+                resultList.innerHTML = '<p style="color:#555; text-align:center; margin-top:50px;">검색된 내용이 없습니다.</p>';
             }
         }
     </script>

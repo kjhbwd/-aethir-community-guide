@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aethir Book Smart Search</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --primary-color: #c1ff00; /* 에이셔 네온 그린 */
+            --text-color: #ffffff;
+            --accent-color: #333;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .desc {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 2.5rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--accent-color);
+            background: var(--card-bg);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(193, 255, 0, 0.2);
+        }
+
+        .result-container {
+            text-align: left;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            border: 1px solid #222;
+            transition: 0.2s;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .link-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .link-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .page-badge {
+            font-size: 0.75rem;
+            background: var(--primary-color);
+            color: black;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .link-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .link-url {
+            font-size: 0.85rem;
+            color: #666;
+            word-break: break-all;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .no-result {
+            color: #555;
+            margin-top: 50px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Aethir Index</h1>
+        <p class="desc">페이지 번호나 키워드(예: 노드, 스토어)를 입력하세요.</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요..." oninput="smartSearch()">
+        </div>
+
+        <div id="resultList" class="result-container">
+            </div>
+    </div>
+
+    <script>
+        const allLinks = [
+            { page: "11", name: "에이서 공식 X (AethirCloud)", url: "https://x.com/AethirCloud", tags: "트위터,소식,공식" },
+            { page: "23", name: "실시간 GPU 대시보드", url: "https://dashboard.aethir.com/protocol/overview", tags: "매출,상태,통계" },
+            { page: "32", name: "Aethir Korea 공식 X", url: "https://x.com/Aethir_Korea", tags: "한국,트위터,커뮤니티" },
+            { page: "32", name: "Aethir Tribe 신청 폼", url: "https://0527e4lvru7.typeform.com/AethirTribe", tags: "홍보대사,트라이브,신청" },
+            { page: "33", name: "Aethir Forge 가이드", url: "https://aethir.com/aethir-forge", tags: "포지,마스터,리더" },
+            { page: "34", name: "에이서 엣지 공식 스토어", url: "https://mintgreen.tech/store/", tags: "구매,기기,쇼핑,엣지" },
+            { page: "39", name: "체커노드 공식 가이드", url: "https://docs.aethir.com/checker-guide", tags: "노드,설치,기술" },
+            { page: "39", name: "체커 오너 포털 (대시보드)", url: "https://app.aethir.com/landingPage", tags: "보상,청구,노드" },
+            { page: "41", name: "Aethir 스테이킹 (게임 풀)", url: "https://user.aethir.com/stake/pools?pool=gaming", tags: "투자,수익,게임" },
+            { page: "49", name: "Zentry 공식 X", url: "https://x.com/zentry", tags: "젠트리,파트너,트위터" }
+        ];
+
+        function smartSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultList = document.getElementById('resultList');
+            resultList.innerHTML = "";
+
+            if (query.trim() === "") return;
+
+            const filtered = allLinks.filter(item => 
+                item.page.includes(query) || 
+                item.name.toLowerCase().includes(query) || 
+                item.tags.includes(query)
+            );
+
+            if (filtered.length > 0) {
+                filtered.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'link-card';
+                    card.innerHTML = `
+                        <div class="link-header">
+                            <a href="${item.url}" target="_blank" class="link-name">${item.name} ↗</a>
+                            <span class="page-badge">P.${item.page}</span>
+                        </div>
+                        <span class="link-url">${item.url}</span>
+                    `;
+                    resultList.appendChild(card);
+                });
+            } else {
+                resultList.innerHTML = '<p class="no-result">검색 결과가 없습니다.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

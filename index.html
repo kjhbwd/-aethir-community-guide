@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir 전자 e-book: 전체 본문 보기</title>
+    <title>Aethir 전자 e-book: 본문 전체 보기</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
@@ -25,65 +25,126 @@
             padding: 40px 20px;
         }
 
-        .container { width: 100%; max-width: 600px; text-align: center; }
-        h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--primary-color); line-height: 1.4; word-break: keep-all; }
+        .container { width: 100%; max-width: 650px; text-align: center; }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--primary-color); line-height: 1.4; }
         .subtitle { font-size: 1.2rem; color: #ffffff; margin-bottom: 15px; font-weight: 600; }
         .guide-text { font-size: 0.95rem; color: #aaa; margin-bottom: 30px; line-height: 1.6; }
 
-        .search-box { position: relative; margin-bottom: 30px; position: sticky; top: 10px; z-index: 100; }
+        .search-box { position: sticky; top: 15px; z-index: 100; margin-bottom: 40px; }
         input {
             width: 100%; padding: 18px 25px; border-radius: 40px; border: 2px solid var(--accent-color);
-            background: rgba(26, 26, 26, 0.95); color: white; font-size: 1.1rem; outline: none; box-sizing: border-box;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1.1rem; outline: none; box-sizing: border-box;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
         input:focus { border-color: var(--primary-color); }
 
         .result-container { text-align: left; width: 100%; }
-        .page-card {
-            background: var(--card-bg); padding: 25px; border-radius: 18px; margin-bottom: 25px;
-            border-left: 5px solid var(--primary-color); animation: fadeIn 0.4s ease-out;
+        .chapter-title { 
+            font-size: 1.4rem; color: var(--primary-color); margin: 40px 0 20px 0; 
+            padding-bottom: 10px; border-bottom: 2px solid var(--accent-color); 
+            text-align: left; width: 100%;
         }
 
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .page-card {
+            background: var(--card-bg); padding: 30px; border-radius: 20px; margin-bottom: 30px;
+            border-top: 1px solid #333; animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .page-badge { font-size: 0.8rem; background: var(--primary-color); color: black; padding: 4px 14px; border-radius: 20px; font-weight: bold; }
-        .content-body { font-size: 1.05rem; color: #e0e0e0; line-height: 1.8; word-break: keep-all; }
+        .content-body { font-size: 1.05rem; color: #e0e0e0; line-height: 1.9; word-break: keep-all; text-align: justify; }
         .highlight { color: var(--primary-color); font-weight: bold; background: rgba(193, 255, 0, 0.2); }
 
-        .links-area { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .links-area { margin-top: 25px; display: flex; gap: 12px; flex-wrap: wrap; }
         .btn-link { 
-            color: black; background: var(--primary-color); padding: 9px 15px; 
-            border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.85rem; 
+            color: black; background: var(--primary-color); padding: 10px 18px; 
+            border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; 
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        footer { margin-top: 80px; color: #555; font-size: 0.8rem; padding-bottom: 40px; }
     </style>
 </head>
-<body onload="smartSearch()"> <div class="container">
+<body onload="smartSearch()">
+
+    <div class="container">
         <h1>Aethir와 함께 미래를 선점하라</h1>
         <div class="subtitle">&lt;전자 e-book&gt; - 모든 페이지 검색 가능</div>
-        <div class="guide-text">종이책 1~63페이지의 모든 핵심 지식을 담았습니다.<br>아래에서 전체 내용을 읽거나, 검색창을 이용해 지식을 찾아보세요.</div>
+        <div class="guide-text">본 도서는 에이셔 생태계 연구를 위한 비공식 가이드입니다. [cite: 3]<br>들어가는 말부터 맺음말까지 전체 본문을 아래에서 바로 읽으실 수 있습니다.</div>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="키워드 검색 (예: ARR, 노드, 수익률)" oninput="smartSearch()">
+            <input type="text" id="searchInput" placeholder="키워드 검색 (예: ARR, 노드, 스테이킹)" oninput="smartSearch()">
         </div>
 
         <div id="resultList" class="result-container"></div>
+        
+        <footer>© 2026 김지호. 본 책은 저작자의 지적 재산으로서 무단 전재와 복제를 금합니다. [cite: 16-17]</footer>
     </div>
 
     <script>
         const bookData = [
-            { page: "1-5", content: "Aethir와 함께 미래를 선점하라: GPU 인프라로 돈 버는 실전 가이드. AI 시대의 고부가가치 산업인 웹3.0과 GPU 클라우드 컴퓨팅의 흐름을 다룹니다.", links: [] },
-            { page: "7-11", content: "투자 기준(Insight/Engine/Revenue): 대표가 현장의 고민을 아는가? 제대로 돌아가는 기술 엔진인가? 잔치가 끝난 뒤에도 실제 매출(ARR)이 발생하는가? 매출은 가치 증명의 성적표입니다.", links: [{name: "공식 X 소식", url: "https://x.com/AethirCloud"}] },
-            { page: "12-14", content: "에이서 작동 원리: 에어비앤비 주택 공유 모델에서 영감을 얻음. 전 세계 유휴 GPU 자원을 연결해 AWS 대비 70~80% 저렴한 비용으로 공급하여 인프라 민주화를 실현합니다.", links: [] },
-            { page: "15-20", content: "리더십: 마크 라이든(Mark Rydon)은 에너지 및 전통 인프라 프로젝트 파이낸싱 전문가이며, 다니엘 왕(Daniel Wang)은 라이엇 게임즈 출신의 비즈니스 전략가입니다.", links: [] },
-            { page: "21-25", content: "매출 성과: 2025년 상반기 ARR 1억 4,100만 달러 돌파. 현재 연간 반복 매출(ARR)은 1억 5,500만 달러를 넘어서며 실질적인 비즈니스 모델의 성공을 증명하고 있습니다.", links: [{name: "매출 대시보드", url: "https://dashboard.aethir.com/protocol/overview"}] },
-            { page: "26-31", content: "글로벌 생태계: 94개국에 분산된 인프라. ATH 토큰은 GPU 공급자와 클라이언트를 연결하는 매개체이자 시스템 가동을 위한 경제 시스템의 근간입니다.", links: [{name: "Aethir Korea X", url: "https://x.com/Aethir_Korea"}] },
-            { page: "34-37", content: "에이서 엣지(Edge): 하드웨어 투자를 통한 보상 수령. 2025년 6월 12일 이후 할당량 정책이 스테이킹 수량에 따른 차등 보상 방식으로 변경되었습니다.", links: [{name: "엣지 스토어", url: "https://mintgreen.tech/store/"}] },
-            { page: "38-40", content: "체커노드(Checker Node): 네트워크 보안관 및 품질 검사관. 전체 ATH 공급량의 15%가 향후 4년간 운영 보상으로 배정되어 안정적 수익을 제공합니다.", links: [{name: "노드 가이드", url: "https://docs.aethir.com/checker-guide"}, {name: "오너 포털", url: "https://app.aethir.com/landingPage"}] },
-            { page: "41-47", content: "스테이킹과 재스테이킹: Gaming Pool(APR 18%) 및 AI Pool 참여. 아이겐레이어 협업을 통한 eATH 보상은 2025년 4분기 시작, 환매는 2026년 6월 13일부터 가능합니다.", links: [{name: "게임 풀 스테이킹", url: "https://user.aethir.com/stake/pools?pool=gaming"}] },
-            { page: "49-52", content: "Zentry 파트너십: 통합 게이밍 플랫폼. Zentry Nexus의 'Aethir Watcher' 활동을 통해 소셜 활동 점수를 획득하고 향후 에어드랍 자격을 확보할 수 있습니다.", links: [{name: "Zentry Nexus", url: "https://nexus.zentry.com/"}] },
-            { page: "53-61", content: "AI Unbundled(AI 연합군): Chainlink, Polyhedra, ChainGPT 등 드림팀 구성. 1,300억 원 규모의 에코시스템 펀드를 통해 25개 이상의 AI 프로젝트를 지원합니다.", links: [] },
-            { page: "62-63", content: "맺음말: 미래 고부가가치 산업의 성장은 GPU 공급에 달려있습니다. 에이서 생태계는 기술 혁신을 통해 새로운 기회를 제공합니다.", links: [] }
+            { 
+                chapter: "시작하며", 
+                page: "1-3", 
+                content: "Aethir와 함께 미래를 선점하라. GPU 인프라로 돈 버는 실전 가이드. [cite: 1-2] 발행: 2026년 01월. 저자: 김지호. [cite: 6-7] 본 도서는 에이셔 생태계 연구를 위한 비공식 가이드입니다. [cite: 3]", 
+                links: [] 
+            },
+            { 
+                chapter: "들어가는 말", 
+                page: "7-11", 
+                content: "크립토 생태계는 블록체인 기반의 미래형 경제 시스템입니다. [cite: 74] 에이서는 단순한 투자용 코인이 아니라, AI와 클라우드 게임이라는 거대한 미래 산업의 핵심 인프라입니다. [cite: 82] 투자의 3대 기준: 1. 대표가 현장의 고민을 아는가? [cite: 95] 2. 제대로 돌아가는 엔진인가? [cite: 100] 3. 잔치가 끝난 뒤에도 돈을 벌고 있는가(매출)? [cite: 102] 매출은 가치 증명의 확실한 성적표입니다. [cite: 106]", 
+                links: [{name: "공식 X 계정", url: "https://x.com/AethirCloud"}] 
+            },
+            { 
+                chapter: "CHAPTER 1: Aethir가 도대체 뭔가요?", 
+                page: "12-14", 
+                content: "AI와 클라우드 게임 시장의 급성장으로 고성능 GPU 수요가 폭발했습니다. [cite: 126] 에이서는 에어비앤비 모델에서 영감을 받아 분산된 유휴 GPU 자원을 연결합니다. [cite: 131-132] 우리 동네 피씨방이나 옆집 고성능 컴퓨터(노드)를 찾아 가장 가까운 곳에서 계산 능력을 공급함으로써 빛처럼 빠른 속도를 제공합니다. [cite: 145-147]", 
+                links: [] 
+            },
+            { 
+                chapter: "CHAPTER 1: 비즈니스 성과", 
+                page: "21-25", 
+                content: "Aethir는 2024년 ARR 약 9,100만 달러를 기록했으며, 2025년 상반기에는 1억 4,100만 달러를 돌파했습니다. [cite: 235, 240] 현재 ARR은 1억 5,500만 달러를 돌파하며 DePIN 분야 수익 1위임을 증명하고 있습니다. [cite: 242] 이것은 실체가 있는 비즈니스 모델의 성공을 의미합니다. [cite: 248]", 
+                links: [{name: "실시간 매출 대시보드", url: "https://dashboard.aethir.com/protocol/overview"}] 
+            },
+            { 
+                chapter: "CHAPTER 2: 실전 부가가치 만들기", 
+                page: "34-38", 
+                content: "에이서 엣지(Edge)는 디지털 개인택시와 같습니다. [cite: 391] 보상은 출석 보상(기본급)과 작업 수당으로 나뉩니다. [cite: 395-399] 2025년 6월 12일 이후, 스테이킹 수량에 따른 차등 보상 정책이 시행되었습니다. [cite: 382-384] 일감이 없는 지역이라면 기본급만으로 본전 기간을 계산해봐야 합니다. [cite: 404]", 
+                links: [{name: "엣지 스토어", url: "https://mintgreen.tech/store/"}] 
+            },
+            { 
+                chapter: "CHAPTER 2: 체커노드 운영", 
+                page: "39-40", 
+                content: "체커노드는 마을의 품질 검사관이자 보안관입니다. [cite: 422] 노드들이 약속한 성능을 내는지 실시간으로 확인하며, 합격 도장을 찍어줘야 보상이 지급됩니다. [cite: 424-426] 전체 ATH 공급량의 15%가 향후 4년간 체커노드 운영자에게 배정되어 있습니다. [cite: 437]", 
+                links: [{name: "노드 가이드", url: "https://docs.aethir.com/checker-guide"}, {name: "오너 포털", url: "https://app.aethir.com/landingPage"}] 
+            },
+            { 
+                chapter: "CHAPTER 2: 스테이킹 전략", 
+                page: "41-48", 
+                content: "Gaming Pool(APR 18.41%)과 AI Pool에 참여하여 수익을 얻을 수 있습니다. [cite: 467-478] 아이겐레이어와의 협업인 eATH 재스테이킹 보상은 2025년 4분기 시작되며, eATH 환매는 2026년 6월 13일부터 가능합니다(30일 베스팅 적용). [cite: 564, 573-574]", 
+                links: [{name: "게임 풀 스테이킹", url: "https://user.aethir.com/stake/pools?pool=gaming"}] 
+            },
+            { 
+                chapter: "CHAPTER 3: Aethir와 Zentry의 시너지", 
+                page: "49-52", 
+                content: "Zentry(젠트리)는 통합 게이밍 생태계를 구축합니다. [cite: 585] Aethir 스테이커들은 Zentry Nexus에서 'The Watcher'로 활동하며 에어드랍 점수를 획득할 수 있습니다. [cite: 630-634] 소셜 활동이 곧 금융적 보상이 되는 소셜 디파이(SocialFi)의 실전 사례입니다. [cite: 598, 600]", 
+                links: [{name: "Zentry Nexus", url: "https://nexus.zentry.com/"}] 
+            },
+            { 
+                chapter: "CHAPTER 4: AI 연합군 (AI Unbundled)", 
+                page: "53-61", 
+                content: "AI Unbundled는 비싼 세트 메뉴가 아닌 필요한 부품만 골라 쓰는 AI 기술 해체를 의미합니다. [cite: 646-647] 체인링크, 폴리헤드라, 오아시스 등 각 분야 국가대표급 기술사들이 에이서 깃발 아래 모였습니다. [cite: 650-658] 1,300억 원 규모의 생태계 펀드를 통해 25개 이상의 AI 서비스가 자라나고 있습니다. [cite: 716-718]", 
+                links: [] 
+            },
+            { 
+                chapter: "맺음말", 
+                page: "62-63", 
+                content: "미래의 고부가가치 산업인 웹3.0과 AI 시대의 성장은 GPU 공급에 달려있습니다. [cite: 758] 에이서는 이 핵심적 문제를 해결하며 폭발적인 매출 성장을 이어가고 있습니다. [cite: 759-760] 에이서 생태계에 대한 이해는 단순한 정보를 넘어 미래 산업의 흐름을 읽는 중요한 기회가 될 것입니다. [cite: 767-768]", 
+                links: [] 
+            }
         ];
 
         function smartSearch() {
@@ -91,12 +152,22 @@
             const resultList = document.getElementById('resultList');
             resultList.innerHTML = "";
 
-            // 검색어가 없으면 전체 데이터 노출
             const filtered = query.trim() === "" 
                 ? bookData 
-                : bookData.filter(item => item.content.toLowerCase().includes(query) || item.page.includes(query));
+                : bookData.filter(item => item.content.toLowerCase().includes(query) || item.chapter.toLowerCase().includes(query));
+
+            let currentChapter = "";
 
             filtered.forEach(item => {
+                // 챕터별 구분선 추가 (검색어가 없을 때만)
+                if (query.trim() === "" && item.chapter !== currentChapter) {
+                    const chapterHeader = document.createElement('div');
+                    chapterHeader.className = 'chapter-title';
+                    chapterHeader.innerText = item.chapter;
+                    resultList.appendChild(chapterHeader);
+                    currentChapter = item.chapter;
+                }
+
                 const card = document.createElement('div');
                 card.className = 'page-card';
                 let bodyText = item.content;
@@ -104,7 +175,7 @@
                     bodyText = bodyText.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>');
                 }
                 card.innerHTML = `
-                    <div class="page-header"><span class="page-badge">Page ${item.page}</span></div>
+                    <div class="page-header"><span class="page-badge">P.${item.page}</span></div>
                     <div class="content-body">${bodyText}</div>
                     <div class="links-area">${item.links.map(l => `<a href="${l.url}" target="_blank" class="btn-link">${l.name} ↗</a>`).join('')}</div>
                 `;

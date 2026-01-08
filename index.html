@@ -3,132 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir 전자 e-book: 7-11p 본문 전체 읽기</title>
+    <title>Aethir와 함께 미래를 선점하라: 전체 본문 읽기</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
             --card-bg: #1a1a1a;
             --primary-color: #c1ff00;
             --text-color: #ffffff;
-            --accent-color: #333;
         }
 
         body {
             font-family: 'Pretendard', -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            margin: 0; padding: 20px;
             line-height: 1.8;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .container { width: 100%; max-width: 650px; }
         .header { text-align: center; margin: 40px 0; }
-        h1 { font-size: 1.6rem; margin-bottom: 10px; color: var(--primary-color); }
-        .subtitle { font-size: 1.1rem; color: #fff; margin-bottom: 25px; }
-
-        /* 검색창 */
+        h1 { font-size: 1.6rem; color: var(--primary-color); margin-bottom: 5px; }
+        
+        /* 검색창 고정 */
         .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 30px; }
         input {
-            width: 100%; padding: 18px 25px; border-radius: 40px; border: 2px solid var(--accent-color);
-            background: rgba(26, 26, 26, 0.95); color: white; font-size: 1.1rem; outline: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+            width: 100%; padding: 18px 25px; border-radius: 40px; border: 2px solid #333;
+            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1.1rem; outline: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(15px);
         }
 
-        /* 리스트 카드 */
-        .content-card {
+        /* 챕터 카드 */
+        .chapter-card {
             background: var(--card-bg); padding: 30px; border-radius: 20px; margin-bottom: 20px;
             border: 1px solid #222; cursor: pointer; transition: 0.3s;
         }
-        .content-card:hover { border-color: var(--primary-color); }
-        .page-tag { font-size: 0.8rem; color: var(--primary-color); font-weight: bold; margin-bottom: 10px; display: block; }
-        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; display: block; }
+        .chapter-card:hover { border-color: var(--primary-color); transform: translateY(-3px); }
+        .page-range { font-size: 0.8rem; color: var(--primary-color); font-weight: bold; margin-bottom: 10px; display: block; }
+        .chapter-title { font-size: 1.25rem; font-weight: 800; color: #fff; }
 
-        /* 대형 팝업창(모달) */
+        /* 대형 독서 팝업 */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; background-color: rgba(0,0,0,0.98);
         }
         .modal-content {
-            background-color: #1a1a1a; margin: 2% auto; padding: 40px;
-            border-radius: 25px; width: 92%; max-width: 700px; height: 85vh;
-            overflow-y: auto; position: relative; border: 1px solid #444;
+            background-color: #151515; margin: 2% auto; padding: 40px;
+            border-radius: 30px; width: 90%; max-width: 750px; height: 85vh;
+            overflow-y: auto; border: 1px solid #333; position: relative;
         }
-        .close-btn { position: sticky; top: -10px; float: right; font-size: 40px; color: #888; cursor: pointer; z-index: 10; }
-        .modal-header { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 30px; font-weight: 800; border-bottom: 2px solid #333; padding-bottom: 15px; }
-        .modal-text { font-size: 1.15rem; color: #eee; line-height: 2.2; text-align: justify; white-space: pre-wrap; padding-bottom: 50px; }
+        .close-btn { position: sticky; top: -10px; float: right; font-size: 40px; color: #888; cursor: pointer; z-index: 100; }
+        .modal-header { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 30px; font-weight: 800; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .modal-text { font-size: 1.15rem; color: #ddd; line-height: 2.2; text-align: justify; white-space: pre-wrap; padding-bottom: 50px; }
 
-        footer { text-align: center; margin-top: 50px; color: #444; font-size: 0.8rem; padding-bottom: 40px; }
+        footer { text-align: center; margin-top: 50px; color: #333; font-size: 0.8rem; }
     </style>
 </head>
-<body onload="loadBook()">
+<body onload="renderList()">
 
     <div class="container">
         <div class="header">
             <h1>Aethir와 함께 미래를 선점하라</h1>
-            <div class="subtitle">&lt;전자 e-book&gt; - 모든 페이지 검색 가능</div>
+            <p style="color:#888;">&lt;디지털 완결판&gt; 모든 본문 읽기 및 검색</p>
         </div>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="궁금한 내용을 입력하세요 (예: ARR, 6월)" oninput="loadBook()">
+            <input type="text" id="searchInput" placeholder="궁금한 단어를 검색하세요" oninput="renderList()">
         </div>
 
-        <div id="contentList"></div>
-        <footer>© 2026 김지호.</footer>
+        <div id="chapterList"></div>
     </div>
 
-    <div id="textModal" class="modal" onclick="closePopup(event)">
+    <div id="readModal" class="modal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="document.getElementById('textModal').style.display='none'">&times;</span>
-            <div id="modalTitle" class="modal-header"></div>
-            <div id="modalBody" class="modal-text"></div>
+            <span class="close-btn" onclick="document.getElementById('readModal').style.display='none'">&times;</span>
+            <div id="mTitle" class="modal-header"></div>
+            <div id="mBody" class="modal-text"></div>
         </div>
     </div>
 
     <script>
-        const bookChapters = [
+        const eBOOK_DATA = [
             { 
-                title: "들어가며: 크립토 생태계와 가치 투자 (7~11p)", 
-                page: "7-11", 
-                content: "크립토 생태계는 블록체인 기반의 미래형 경제 시스템입니다. 수많은 프로젝트가 쏟아져 나오지만, 진정한 가치를 지닌 것을 찾기란 쉽지 않습니다.\n\n저자는 좋은 프로젝트를 고르는 기준으로 다음 세 가지를 제시합니다.\n\n첫째, 'Insight(통찰력)'입니다. 프로젝트를 이끄는 대표가 현장의 고민을 깊이 이해하고 있는지가 중요합니다.\n둘째, 'Engine(기술력)'입니다. 단순한 아이디어를 넘어 실제로 작동하는 강력한 기술 엔진을 보유했는지를 봐야 합니다.\n셋째, 'Revenue(매출)'입니다. 프로젝트가 지속 가능하려면 실질적인 수익이 발생해야 합니다.\n\n매출은 세상에 필요한 가치를 증명하는 가장 확실한 성적표입니다. 에이서(Aethir)는 이 세 가지 기준에서 압도적인 성과를 보여주며, 단순한 투자를 넘어 산업의 흐름을 읽는 중요한 기회를 제공합니다."
+                title: "들어가며: 크립토 생태계와 가치 투자", 
+                range: "p.7-11", 
+                content: "크립토 생태계는 블록체인 기반의 미래형 경제 시스템입니다. 수많은 프로젝트가 쏟아져 나오지만, 진정한 가치를 지닌 것을 찾기란 쉽지 않습니다. 저는 오늘 여러분께 좋은 프로젝트를 선별하는 저만의 세 가지 기준을 소개하고자 합니다.\n\n첫째는 Insight(통찰력)입니다. 프로젝트의 대표가 현장의 고민을 얼마나 깊이 있게 이해하고 있는가가 핵심입니다. 둘째는 Engine(기술 엔진)입니다. 구호만 외치는 것이 아니라, 실제로 약속한 기능을 수행할 수 있는 강력한 기술력을 보유했는지를 검증해야 합니다. 셋째는 Revenue(매출)입니다. 잔치가 끝난 뒤에도 프로젝트가 살아남으려면 결국 실질적인 수익이 발생해야 합니다. 매출은 세상에 필요한 가치를 제공했다는 증거이자, 지속 가능성을 보여주는 가장 정직한 성적표입니다." 
             },
             { 
-                title: "에이서의 원리와 리더십 (12~20p)", 
-                page: "12-20", 
-                content: "에이서는 전 세계 유휴 GPU 자원을 활용하는 탈중앙화 인프라입니다. 에어비앤비 모델처럼 필요한 곳에 연산 능력을 공급하여 비용을 70~80% 절감합니다.\n\n리더 마크 라이든과 다니엘 왕은 인프라 전문가들로, 프로젝트의 실체를 구축하는 데 집중하고 있습니다."
+                title: "CHAPTER 1: 에이서, GPU 부족 문제를 해결하다", 
+                range: "p.12-31", 
+                content: "에이서는 전 세계에 흩어져 있는 유휴 GPU 자원을 활용하는 탈중앙화 컴퓨팅 네트워크입니다. 쉽게 말해 'GPU계의 에어비앤비'입니다. 고가의 인프라를 직접 구축할 필요 없이, 전 세계의 남는 연산 능력을 효율적으로 연결하여 비용을 기존 빅테크 클라우드 대비 최대 86%까지 절감합니다.\n\n에이서의 가치는 숫자로 증명됩니다. 2024년 12월 ARR 9,100만 달러를 기록한 후, 2025년 상반기에는 1억 4,100만 달러를 돌파했습니다. 현재 ARR은 1억 5,500만 달러를 넘어서며 DePIN 분야 수익 1위임을 입증했습니다." 
             },
             { 
-                title: "비즈니스 성과 (21~31p)", 
-                page: "21-31", 
-                content: "2025년 상반기 ARR 1억 4,100만 달러 돌파. 현재 1억 5,500만 달러 이상의 매출을 기록하며 실질적 성공을 증명 중입니다."
+                title: "CHAPTER 2: 실전 부가가치 창출 (노드/스테이킹)", 
+                range: "p.34-48", 
+                content: "독자 여러분이 직접 참여할 수 있는 방법은 크게 두 가지입니다. 첫째는 체커노드 운영입니다. 네트워크 보안관으로서 보상을 받으며, 전체 공급량의 15%가 이들에게 배정됩니다.\n\n둘째는 스테이킹입니다. Gaming Pool은 현재 연이율 약 18%의 수익을 제공하고 있습니다. 또한 eATH 재스테이킹 보상은 2025년 4분기 시작되며, 환매 가능한 날짜인 2026년 6월 13일을 꼭 기억하시기 바랍니다." 
+            },
+            { 
+                title: "CHAPTER 4 & 맺음말: AI 연합군과 미래 선점", 
+                range: "p.53-63", 
+                content: "에이서는 체인링크, 폴리헤드라 등과 함께 'AI 연합군'을 구성했습니다. 이는 비싼 세트 메뉴가 아닌 필요한 부품만 골라 쓰는 AI 기술 해체를 의미합니다. 약 1,300억 원 규모의 카탈리스트 펀드를 통해 25개 이상의 유망한 AI 프로젝트를 지원하고 있습니다.\n\n미래의 핵심 자원은 결국 GPU가 될 것입니다. 에이서 생태계와 함께하는 것은 단순한 투자를 넘어 기술 혁신의 최전선에 서는 일입니다. 이 가이드가 여러분이 미래의 부가가치를 선점하는 데 유용한 나침반이 되기를 바랍니다." 
             }
         ];
 
-        function loadBook() {
+        function renderList() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const list = document.getElementById('contentList');
+            const list = document.getElementById('chapterList');
             list.innerHTML = "";
-            const filtered = query === "" ? bookChapters : bookChapters.filter(ch => ch.content.toLowerCase().includes(query) || ch.title.toLowerCase().includes(query));
-            filtered.forEach(ch => {
+            const filtered = eBOOK_DATA.filter(d => d.content.toLowerCase().includes(query) || d.title.toLowerCase().includes(query));
+            filtered.forEach(d => {
                 const card = document.createElement('div');
-                card.className = 'content-card';
-                card.onclick = () => openPopup(ch.title, ch.content, ch.page);
-                card.innerHTML = `<span class="page-tag">P.${ch.page}</span><span class="card-title">${ch.title}</span>`;
+                card.className = 'chapter-card';
+                card.onclick = () => {
+                    document.getElementById('mTitle').innerText = d.title;
+                    document.getElementById('mBody').innerText = d.content;
+                    document.getElementById('readModal').style.display = 'block';
+                };
+                card.innerHTML = `<span class="page-range">${d.range}</span><div class="chapter-title">${d.title}</div>`;
                 list.appendChild(card);
             });
         }
-
-        function openPopup(title, content, page) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalBody').innerText = content;
-            document.getElementById('textModal').style.display = "block";
-        }
-
-        function closePopup(e) { if (e.target.id === "textModal") document.getElementById('textModal').style.display = "none"; }
+        function closeModal(e) { if(e.target.id === 'readModal') e.target.style.display = 'none'; }
     </script>
 </body>
 </html>

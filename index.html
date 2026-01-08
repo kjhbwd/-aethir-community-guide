@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir 커뮤니티 가이드</title>
+    <title>Aethir 지식 가이드: 목차 및 링크</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
@@ -15,33 +15,31 @@
 
         body {
             font-family: 'Pretendard', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0; padding: 20px;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg-color); color: var(--text-color);
+            margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center;
         }
 
         .container { width: 100%; max-width: 650px; text-align: center; }
-        .header { margin: 40px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; }
-        h1 { font-size: 1.5rem; color: var(--primary-color); line-height: 1.5; word-break: keep-all; margin: 0; }
-        .subtitle { font-size: 1.1rem; color: #fff; margin-top: 10px; font-weight: 600; }
+        .header { margin: 30px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
+        h1 { font-size: 1.4rem; color: var(--primary-color); line-height: 1.5; word-break: keep-all; margin: 0; }
+        .subtitle { font-size: 1rem; color: #fff; margin-top: 8px; font-weight: 600; }
 
         /* 검색창 */
         .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 30px; width: 100%; }
         input {
-            width: 100%; padding: 18px 25px; border-radius: 40px; border: 2px solid var(--accent-color);
-            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1.1rem; outline: none; box-sizing: border-box;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+            width: 100%; padding: 15px 20px; border-radius: 30px; border: 1px solid var(--accent-color);
+            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1rem; outline: none; box-sizing: border-box;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
         }
 
-        /* 카드 디자인 */
+        /* 콤팩트 카드 디자인 */
         .item-card {
-            background: var(--card-bg); padding: 25px; border-radius: 20px; margin-bottom: 20px;
-            text-align: left; cursor: pointer; border: 1px solid #222; transition: 0.3s;
+            background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px;
+            text-align: left; cursor: pointer; border: 1px solid #222; transition: 0.2s;
         }
-        .item-card:hover { border-color: var(--primary-color); transform: translateY(-3px); }
-        .item-page { color: var(--primary-color); font-size: 0.85rem; font-weight: bold; }
-        .item-title { font-size: 1.25rem; font-weight: 800; margin-top: 8px; color: #fff; }
+        .item-card:hover { border-color: var(--primary-color); transform: translateY(-2px); }
+        .item-page { color: var(--primary-color); font-size: 0.8rem; font-weight: bold; }
+        .item-title { font-size: 1.15rem; font-weight: 800; margin-top: 5px; color: #fff; }
 
         /* 팝업 모달 */
         .modal {
@@ -49,26 +47,25 @@
             width: 100%; height: 100%; background: rgba(0,0,0,0.95);
         }
         .modal-content {
-            background: #111; margin: 5% auto; padding: 40px; border-radius: 30px;
-            width: 90%; max-width: 600px; border: 1px solid #333; position: relative;
+            background: #111; margin: 10% auto; padding: 30px; border-radius: 25px;
+            width: 90%; max-width: 550px; border: 1px solid #333; position: relative;
         }
-        .modal-header { font-size: 1.4rem; color: var(--primary-color); font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
-        .modal-summary { font-size: 1.05rem; color: #eee; line-height: 1.9; margin-bottom: 30px; }
-        .modal-summary ul { padding-left: 20px; }
-        .modal-summary li { margin-bottom: 10px; }
+        .modal-header { font-size: 1.3rem; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .modal-summary { font-size: 1rem; color: #eee; line-height: 1.8; margin-bottom: 25px; }
+        .modal-summary ul { padding-left: 20px; margin: 0; }
+        .modal-summary li { margin-bottom: 8px; }
 
-        /* 버튼 및 링크 */
-        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        /* 링크 버튼 */
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
         .action-btn {
-            background: var(--primary-color); color: #000; padding: 12px 20px;
-            border-radius: 10px; text-decoration: none; font-size: 0.9rem; font-weight: 800; flex: 1; text-align: center;
+            background: var(--primary-color); color: #000; padding: 10px 15px;
+            border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 800; flex: 1; text-align: center;
         }
-        .close-x { float: right; color: #555; font-size: 35px; cursor: pointer; line-height: 1; }
+        .close-x { float: right; color: #555; font-size: 30px; cursor: pointer; }
 
-        /* 면책 조항 (Footer) */
-        footer { margin-top: 80px; padding: 30px; border-top: 1px solid #222; width: 100%; box-sizing: border-box; }
-        .disclaimer { font-size: 0.85rem; color: #666; line-height: 1.6; text-align: center; word-break: keep-all; }
-        .copyright { margin-top: 15px; color: #444; font-size: 0.75rem; text-align: center; }
+        /* 비공식 가이드 명시 (Footer) */
+        footer { margin-top: 50px; padding: 25px; border-top: 1px solid #222; width: 100%; box-sizing: border-box; }
+        .disclaimer { font-size: 0.8rem; color: #666; line-height: 1.6; text-align: center; word-break: keep-all; }
     </style>
 </head>
 <body onload="render()">
@@ -80,7 +77,7 @@
         </div>
 
         <div class="search-box">
-            <input type="text" id="q" placeholder="궁금한 내용을 입력하세요 (예: ARR, 노드, 6월)" oninput="render()">
+            <input type="text" id="q" placeholder="키워드로 검색 (예: ARR, 수익, 6월)" oninput="render()">
         </div>
 
         <div id="list"></div>
@@ -88,11 +85,8 @@
         <footer>
             <div class="disclaimer">
                 <b>[비공식 커뮤니티 가이드 고지]</b><br>
-                본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 커뮤니티 가이드입니다. 
-                에이셔 재단의 공식 입장과는 무관하며, 본문에 수록된 정보는 투자 권유가 아닙니다. 
-                모든 투자의 책임은 투자자 본인에게 있음을 알려드립니다.
+                본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다. 에이셔 재단의 공식 입장과는 무관하며, 본문 정보는 투자 권유가 아닙니다. 모든 투자의 책임은 본인에게 있습니다.
             </div>
-            <div class="copyright">© 2026 김지호. 본 콘텐츠의 무단 전재 및 복제를 금합니다.</div>
         </footer>
     </div>
 
@@ -108,25 +102,39 @@
     <script>
         const data = [
             {
-                page: "p.7-11",
-                title: "들어가는 말: 가치 투자의 3대 기준",
-                summary: "<ul><li><b>통찰력(Insight):</b> 대표가 현장의 문제를 꿰뚫고 있는가?</li><li><b>기술력(Engine):</b> 실제로 작동하는 검증된 기술적 토대</li><li><b>매출(Revenue):</b> ARR $155M 등 실질적 가치 증명</li></ul>",
-                links: [{n: "공식 X (소식 확인)", u: "https://x.com/AethirCloud"}]
+                p: "p.7-11", t: "들어가는 말: 가치 투자의 3대 기준",
+                s: "<ul><li><b>통찰력:</b> 대표가 현장의 문제를 알고 있는가?</li><li><b>엔진:</b> 실제로 작동하는 검증된 기술인가?</li><li><b>매출:</b> ARR $155M 등 실질적 가치 증명</li></ul>",
+                l: [{n: "공식 X 확인", u: "https://x.com/AethirCloud"}]
             },
             {
-                page: "p.21-31",
-                title: "비즈니스 성과: 매출 데이터 요약",
-                summary: "<ul><li><b>성장 지표:</b> 2025년 상반기 ARR 1억 4,100만 달러 돌파</li><li><b>수익 순위:</b> 전 세계 DePIN 프로젝트 중 수익 1위 달성</li><li><b>글로벌 인프라:</b> 94개국에 걸친 유휴 GPU 자원 연결</li></ul>",
-                links: [{n: "실시간 대시보드", u: "https://dashboard.aethir.com/protocol/overview"}]
+                p: "p.12-20", t: "Chapter 1: 에이셔 원리와 작동 모델",
+                s: "<ul><li><b>공유 경제:</b> 유휴 GPU를 연결하는 '에어비앤비' 모델</li><li><b>비용 혁신:</b> 기존 클라우드 대비 최대 86% 비용 절감</li></ul>",
+                l: [{n: "Aethir Korea X", u: "https://x.com/Aethir_Korea"}]
             },
             {
-                page: "p.34-48",
-                title: "실전 가이드: 노드 및 스테이킹",
-                summary: "<ul><li><b>체커노드:</b> 전체 ATH 공급량의 15% 보상 배정</li><li><b>스테이킹 수익:</b> Gaming Pool 연이율 약 18.41%</li><li><b>중요 일정:</b> 2026년 6월 13일 eATH 환매 시작</li></ul>",
-                links: [
-                    {n: "노드 가이드", u: "https://docs.aethir.com/checker-guide"},
-                    {n: "스테이킹 센터", u: "https://user.aethir.com/stake/pools?pool=gaming"}
-                ]
+                p: "p.21-31", t: "Chapter 1: 압도적인 비즈니스 성과",
+                s: "<ul><li><b>매출 성적:</b> 2025년 상반기 ARR 1억 4,100만 달러 돌파</li><li><b>수익 1위:</b> 글로벌 DePIN 프로젝트 중 매출 1위 기록</li></ul>",
+                l: [{n: "실시간 대시보드", u: "https://dashboard.aethir.com/protocol/overview"}]
+            },
+            {
+                p: "p.34-40", t: "Chapter 2: 체커노드 및 엣지 가이드",
+                s: "<ul><li><b>노드 보상:</b> 전체 ATH 공급량의 15% 보상 배정</li><li><b>엣지 하드웨어:</b> 개인용 GPU 채굴 및 작업 수당 수령</li></ul>",
+                l: [{n: "노드 가이드", u: "https://docs.aethir.com/checker-guide"}, {n: "엣지 스토어", u: "https://mintgreen.tech/store/"}]
+            },
+            {
+                p: "p.41-48", t: "Chapter 2: 스테이킹 전략과 수익률",
+                s: "<ul><li><b>수익률:</b> Gaming Pool 참여 시 연이율 약 18.41%</li><li><b>중요 날짜:</b> 2026년 6월 13일 eATH 환매 시작</li></ul>",
+                l: [{n: "스테이킹 센터", u: "https://user.aethir.com/stake/pools?pool=gaming"}]
+            },
+            {
+                p: "p.49-61", t: "Chapter 4: AI 연합군과 생태계 확장",
+                s: "<ul><li><b>AI Unbundled:</b> 필요한 AI 부품만 골라 쓰는 기술 해체</li><li><b>Zentry 시너지:</b> 소셜 활동을 통한 에어드랍 포인트 획득</li></ul>",
+                l: [{n: "Zentry Nexus", u: "https://nexus.zentry.com/"}]
+            },
+            {
+                p: "p.62-63", t: "맺음말: 산업의 흐름과 미래 선점",
+                s: "<ul><li><b>핵심 자원:</b> GPU는 AI 시대의 동력, 에이셔가 그 중심</li><li><b>기회 선점:</b> 기술 혁신의 최전선에서 미래 가치 확보</li></ul>",
+                l: []
             }
         ];
 
@@ -134,19 +142,17 @@
             const q = document.getElementById('q').value.toLowerCase();
             const list = document.getElementById('list');
             list.innerHTML = "";
-            const filtered = data.filter(d => d.title.toLowerCase().includes(q) || d.summary.toLowerCase().includes(q));
-            
+            const filtered = data.filter(d => d.t.toLowerCase().includes(q) || d.s.toLowerCase().includes(q));
             filtered.forEach(d => {
                 const card = document.createElement('div');
                 card.className = 'item-card';
                 card.onclick = () => {
-                    document.getElementById('mTitle').innerText = d.title + " (" + d.page + ")";
-                    document.getElementById('mSummary').innerHTML = d.summary;
-                    const linksDiv = document.getElementById('mLinks');
-                    linksDiv.innerHTML = d.links.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l.n} ↗</a>`).join('');
+                    document.getElementById('mTitle').innerText = d.t + " (" + d.p + ")";
+                    document.getElementById('mSummary').innerHTML = d.s;
+                    document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l.n} ↗</a>`).join('');
                     document.getElementById('modal').style.display = 'block';
                 };
-                card.innerHTML = `<span class="item-page">${d.page}</span><div class="item-title">${d.title}</div>`;
+                card.innerHTML = `<span class="item-page">${d.p}</span><div class="item-title">${d.t}</div>`;
                 list.appendChild(card);
             });
         }

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir 지식 가이드: 목차 및 링크</title>
+    <title>Aethir Guide: Smart Search</title>
     <style>
         :root {
             --bg-color: #0d0d0d; --card-bg: #1a1a1a; --primary-color: #c1ff00;
-            --text-color: #ffffff; --accent-color: #333;
+            --text-color: #ffffff; --accent-color: #333; --buy-btn-color: #ff4500;
         }
         body {
             font-family: 'Pretendard', -apple-system, sans-serif;
@@ -15,9 +15,27 @@
             margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center;
         }
         .container { width: 100%; max-width: 650px; text-align: center; }
+        
+        /* 언어 전환 버튼 */
+        .lang-switch { position: absolute; top: 20px; right: 20px; }
+        .lang-btn {
+            background: var(--accent-color); color: white; border: 1px solid var(--primary-color);
+            padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: bold;
+        }
+
         .header { margin: 30px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
         h1 { font-size: 1.4rem; color: var(--primary-color); line-height: 1.5; word-break: keep-all; margin: 0; }
         .subtitle { font-size: 1rem; color: #fff; margin-top: 8px; font-weight: 600; }
+        
+        .buy-now-area { margin: 20px 0; }
+        .buy-now-btn {
+            background: var(--buy-btn-color); color: white; padding: 15px 30px;
+            border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 800;
+            display: inline-block; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+            transition: 0.3s; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
         .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 30px; width: 100%; }
         input {
             width: 100%; padding: 15px 20px; border-radius: 30px; border: 1px solid var(--accent-color);
@@ -31,43 +49,49 @@
         .item-card:hover { border-color: var(--primary-color); transform: translateY(-2px); }
         .item-page { color: var(--primary-color); font-size: 0.75rem; font-weight: bold; }
         .item-title { font-size: 1.1rem; font-weight: 800; margin-top: 4px; color: #fff; }
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
-        }
-        .modal-content {
-            background: #111; margin: 10% auto; padding: 30px; border-radius: 20px;
-            width: 85%; max-width: 500px; border: 1px solid #333; position: relative;
-        }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
+        .modal-content { background: #111; margin: 10% auto; padding: 30px; border-radius: 20px; width: 85%; max-width: 500px; border: 1px solid #333; position: relative; }
         .modal-header { font-size: 1.25rem; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
         .modal-summary { font-size: 0.95rem; color: #eee; line-height: 1.8; margin-bottom: 25px; }
         .modal-summary ul { padding-left: 18px; margin: 0; }
-        .modal-summary li { margin-bottom: 6px; }
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
-        .action-btn {
-            background: var(--primary-color); color: #000; padding: 10px 14px;
-            border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 800; flex: 1; text-align: center;
-        }
+        .action-btn { background: var(--primary-color); color: #000; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 800; flex: 1; text-align: center; }
         .close-x { float: right; color: #555; font-size: 28px; cursor: pointer; }
+        
         footer { margin-top: 50px; padding: 25px; border-top: 1px solid #222; width: 100%; box-sizing: border-box; }
         .disclaimer { font-size: 0.75rem; color: #666; line-height: 1.6; text-align: center; word-break: keep-all; }
     </style>
 </head>
 <body onload="render()">
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">KO / EN</button>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>Aethir와 함께 미래를 선점하라</h1>
-            <div class="subtitle">본문 핵심 요약 및 스마트 검색 가이드</div>
+            <h1 id="main-title">Aethir와 함께 미래를 선점하라</h1>
+            <div id="sub-title" class="subtitle">본문 핵심 요약 및 스마트 검색 가이드</div>
         </div>
-        <div class="search-box"><input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()"></div>
+
+        <div class="buy-now-area">
+            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 종이책 구매하러 가기</a>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()">
+        </div>
+        
         <div id="list"></div>
+
         <footer>
-            <div class="disclaimer">
+            <div id="footer-text" class="disclaimer">
                 <b>[비공식 커뮤니티 가이드 고지]</b><br>
-                본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다. 에이셔 재단의 공식 입장과는 무관하며, 본문 정보는 투자 권유가 아닙니다. 모든 투자의 책임은 본인에게 있습니다.
+                본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다. 에이셔 재단의 공식 입장과는 무관하며 모든 투자의 책임은 본인에게 있습니다.
             </div>
         </footer>
     </div>
+
     <div id="modal" class="modal" onclick="closeM(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-x" onclick="document.getElementById('modal').style.display='none'">&times;</span>
@@ -76,28 +100,67 @@
             <div id="mLinks" class="btn-group"></div>
         </div>
     </div>
+
     <script>
+        let currentLang = 'ko';
+        const i18n = {
+            ko: { title: "Aethir와 함께 미래를 선점하라", sub: "본문 핵심 요약 및 스마트 검색 가이드", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다.", authorX: "김지호 X 계정" },
+            en: { title: "Seize the Future with Aethir", sub: "Core Summaries & Smart Search Guide", buy: "📙 Get the Printed Book", placeholder: "Search keywords (e.g., ARR, Node, June)", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This book and website are unofficial guides for studying the Aethir ecosystem.", authorX: "Author's X (Twitter)" }
+        };
+
         const data = [
-            { p: "p.6-11", t: "들어가는 말 가치 투자의 3대 기준", s: "<ul><li><b>통찰력</b> 대표가 현장의 고민을 꿰뚫고 있는가?</li><li><b>기술 엔진</b> 약속을 구현할 검증된 기술적 토대</li><li><b>실질 매출</b> ARR $166M 달성 등 가치 증명의 성적표</li></ul>", l: [{n: "공식 X 소식", u: "https://x.com/AethirCloud"}] },
-            { p: "p.12-20", t: "Chapter 1 에이셔 작동 원리", s: "<ul><li><b>공유 모델</b> 유휴 GPU를 연결하는 '에어비앤비' 모델</li><li><b>비용 혁신</b> 기존 클라우드 대비 최대 86% 비용 절감 (p.59 참조)</li></ul>", l: [{n: "에이셔 코리아 X", u: "https://x.com/Aethir_Korea"}] },
-            { p: "p.21-30", t: "Chapter 1 압도적인 비즈니스 성과", s: "<ul><li><b>ARR</b> 2026년 기준 1억 6,600만 달러 돌파</li><li><b>시장 위치</b> 글로벌 DePIN 프로젝트 수익 1위</li></ul>", l: [{n: "매출 대시보드", u: "https://dashboard.aethir.com/protocol/overview"}] },
-            { p: "p.31-39", t: "Chapter 2 체커노드 및 홍보 전략", s: "<ul><li><b>홍보</b> X계정 인포파이 활용 및 커뮤니티 활동 가이드</li><li><b>노드</b> 전체 ATH 공급량의 15% 보안관 보상 배정</li></ul>", l: [{n: "노드 가이드", u: "https://docs.aethir.com/checker-guide"}] },
-            { p: "p.40-47", t: "Chapter 2 스테이킹과 보상 체계", s: "<ul><li><b>수익률</b> Gaming Pool 연이율 등 보상 메커니즘</li><li><b>일정</b> 2026년 6월 13일 eATH 환매 시작</li></ul>", l: [{n: "스테이킹 센터", u: "https://user.aethir.com/stake/pools?pool=gaming"}] },
-            { p: "p.48-60", t: "Chapter 3 Aethir와 Zentry의 시너지", s: "<ul><li><b>웹3 게이밍</b> GPU 인프라와 게이밍 플랫폼의 만남</li><li><b>Zentry Nexus</b> 소셜 활동을 통한 보상 포인트 획득</li></ul>", l: [{n: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
-            { p: "p.61-62", t: "맺음말 미래 산업 선점", s: "<ul><li><b>산업 전망</b> AI와 웹3.0 시대의 핵심 GPU 클라우드</li><li><b>지속적 소통</b> 저자와의 교류를 통해 함께 성장하는 기회</li></ul>", l: [{n: "김지호 X 계정", u: "https://x.com/thejediworld77"}] }
+            { 
+                p: "p.6-11", 
+                t_ko: "들어가며 가치 투자의 3대 기준", t_en: "Intro: 3 Standards of Value Investing",
+                s_ko: "<ul><li><b>통찰력</b> 대표가 현장의 고민을 꿰뚫고 있는가?</li><li><b>실질 매출</b> ARR $166M 달성 등 가치 증명</li></ul>",
+                s_en: "<ul><li><b>Insight</b> Does the leadership understand the field?</li><li><b>Revenue</b> Proven value with $166M ARR</li></ul>",
+                l: [{n_ko: "공식 X 소식", n_en: "Official X", u: "https://x.com/AethirCloud"}] 
+            },
+            { 
+                p: "p.12-20", 
+                t_ko: "Chapter 1 에이셔 작동 원리", t_en: "Chapter 1: How Aethir Works",
+                s_ko: "<ul><li><b>공유 모델</b> 유휴 GPU를 연결하는 시스템</li><li><b>비용 혁신</b> 기존 클라우드 대비 최대 86% 저렴</li></ul>",
+                s_en: "<ul><li><b>Sharing Model</b> A system connecting idle GPUs</li><li><b>Cost Innovation</b> Up to 86% cheaper than legacy cloud</li></ul>",
+                l: [{n_ko: "에이셔 코리아 X", n_en: "Aethir Korea X", u: "https://x.com/Aethir_Korea"}] 
+            },
+            { 
+                p: "p.31-39", 
+                t_ko: "Chapter 2 보안관(체커노드) 보상", t_en: "Chapter 2: Sheriff (Checker Node) Rewards",
+                s_ko: "<ul><li><b>보안관</b> 네트워크 감시를 통한 품질 유지 역할</li><li><b>보상</b> 전체 ATH 공급량의 15% 배정</li></ul>",
+                s_en: "<ul><li><b>Sheriff</b> Roles maintaining quality via monitoring</li><li><b>Rewards</b> 15% of total ATH supply allocated</li></ul>",
+                l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] 
+            },
+            { 
+                p: "p.61-62", 
+                t_ko: "맺음말 미래 산업 선점", t_en: "Conclusion: Seizing Future Industries",
+                s_ko: "<ul><li><b>비전</b> AI와 웹3.0 시대의 핵심 인프라</li><li><b>교류</b> 저자와의 지속적인 소통</li></ul>",
+                s_en: "<ul><li><b>Vision</b> Core infrastructure for AI & Web3</li><li><b>Network</b> Stay connected with the author</li></ul>",
+                l: [{n_ko: "김지호 X 계정", n_en: "Author's X", u: "https://x.com/thejediworld77"}] 
+            }
         ];
+
+        function toggleLang() {
+            currentLang = (currentLang === 'ko') ? 'en' : 'ko';
+            document.getElementById('main-title').innerText = i18n[currentLang].title;
+            document.getElementById('sub-title').innerText = i18n[currentLang].sub;
+            document.getElementById('buy-btn').innerText = i18n[currentLang].buy;
+            document.getElementById('q').placeholder = i18n[currentLang].placeholder;
+            document.getElementById('footer-text').innerHTML = i18n[currentLang].footer;
+            render();
+        }
+
         function render() {
             const q = document.getElementById('q').value.toLowerCase();
             const list = document.getElementById('list'); list.innerHTML = "";
-            data.filter(d => d.t.toLowerCase().includes(q) || d.s.toLowerCase().includes(q)).forEach(d => {
+            data.filter(d => d[`t_${currentLang}`].toLowerCase().includes(q) || d[`s_${currentLang}`].toLowerCase().includes(q)).forEach(d => {
                 const card = document.createElement('div'); card.className = 'item-card';
                 card.onclick = () => {
-                    document.getElementById('mTitle').innerText = d.t + " (" + d.p + ")";
-                    document.getElementById('mSummary').innerHTML = d.s;
-                    document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l.n} ↗</a>`).join('');
+                    document.getElementById('mTitle').innerText = d[`t_${currentLang}`] + " (" + d.p + ")";
+                    document.getElementById('mSummary').innerHTML = d[`s_${currentLang}`];
+                    document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l[`n_${currentLang}`]} ↗</a>`).join('');
                     document.getElementById('modal').style.display = 'block';
                 };
-                card.innerHTML = `<span class="item-page">${d.p}</span><div class="item-title">${d.t}</div>`;
+                card.innerHTML = `<span class="item-page">${d.p}</span><div class="item-title">${d[`t_${currentLang}`]}</div>`;
                 list.appendChild(card);
             });
         }

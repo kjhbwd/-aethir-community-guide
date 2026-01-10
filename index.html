@@ -13,54 +13,67 @@
             font-family: 'Pretendard', -apple-system, sans-serif;
             background-color: var(--bg-color); color: var(--text-color);
             margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh;
         }
-        .container { width: 100%; max-width: 650px; text-align: center; }
+        .container { width: 100%; max-width: 800px; text-align: center; }
         
-        /* 언어 전환 버튼 */
-        .lang-switch { position: absolute; top: 20px; right: 20px; }
+        /* 한영 버튼 */
+        .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 1000; }
         .lang-btn {
             background: var(--accent-color); color: white; border: 1px solid var(--primary-color);
-            padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: bold;
+            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold;
         }
 
-        .header { margin: 30px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
-        h1 { font-size: 1.4rem; color: var(--primary-color); line-height: 1.5; word-break: keep-all; margin: 0; }
-        .subtitle { font-size: 1rem; color: #fff; margin-top: 8px; font-weight: 600; }
+        .header { margin: 20px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
+        h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; }
+        .subtitle { font-size: 1rem; color: #fff; margin-top: 10px; font-weight: 600; }
         
         .buy-now-area { margin: 20px 0; }
         .buy-now-btn {
-            background: var(--buy-btn-color); color: white; padding: 15px 30px;
-            border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 800;
+            background: var(--buy-btn-color); color: white; padding: 12px 25px;
+            border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 800;
             display: inline-block; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
             transition: 0.3s; animation: pulse 2s infinite;
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
-        .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 30px; width: 100%; }
+        .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; }
         input {
-            width: 100%; padding: 15px 20px; border-radius: 30px; border: 1px solid var(--accent-color);
-            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1rem; outline: none; box-sizing: border-box;
+            width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--accent-color);
+            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1rem; box-sizing: border-box;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
         }
+
+        /* 카드 그리드 - 데스크톱에서 2열 배치 가능 */
+        .grid-list {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px; width: 100%;
+        }
         .item-card {
-            background: var(--card-bg); padding: 18px; border-radius: 12px; margin-bottom: 12px;
+            background: var(--card-bg); padding: 15px; border-radius: 12px;
             text-align: left; cursor: pointer; border: 1px solid #222; transition: 0.2s;
         }
-        .item-card:hover { border-color: var(--primary-color); transform: translateY(-2px); }
-        .item-page { color: var(--primary-color); font-size: 0.75rem; font-weight: bold; }
-        .item-title { font-size: 1.1rem; font-weight: 800; margin-top: 4px; color: #fff; }
+        .item-card:hover { border-color: var(--primary-color); background: #222; }
+        .item-page { color: var(--primary-color); font-size: 0.7rem; font-weight: bold; }
+        .item-title { font-size: 1rem; font-weight: 800; margin-top: 5px; color: #fff; line-height: 1.4; }
         
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { background: #111; margin: 10% auto; padding: 30px; border-radius: 20px; width: 85%; max-width: 500px; border: 1px solid #333; position: relative; }
-        .modal-header { font-size: 1.25rem; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .modal-summary { font-size: 0.95rem; color: #eee; line-height: 1.8; margin-bottom: 25px; }
-        .modal-summary ul { padding-left: 18px; margin: 0; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
+        .modal-content { background: #111; margin: 5% auto; padding: 25px; border-radius: 20px; width: 85%; max-width: 500px; border: 1px solid #333; }
+        .modal-header { font-size: 1.2rem; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .modal-summary { font-size: 0.9rem; color: #eee; line-height: 1.7; margin-bottom: 20px; }
+        .modal-summary ul { padding-left: 18px; }
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
-        .action-btn { background: var(--primary-color); color: #000; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 800; flex: 1; text-align: center; }
+        .action-btn { background: var(--primary-color); color: #000; padding: 10px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 800; flex: 1; text-align: center; }
         .close-x { float: right; color: #555; font-size: 28px; cursor: pointer; }
         
-        footer { margin-top: 50px; padding: 25px; border-top: 1px solid #222; width: 100%; box-sizing: border-box; }
-        .disclaimer { font-size: 0.75rem; color: #666; line-height: 1.6; text-align: center; word-break: keep-all; }
+        footer { margin-top: 40px; padding: 20px; border-top: 1px solid #222; width: 100%; }
+        .disclaimer { font-size: 0.7rem; color: #666; line-height: 1.5; text-align: center; }
+
+        @media (max-width: 600px) {
+            .lang-switch { top: 10px; right: 10px; }
+            h1 { font-size: 1.2rem; }
+            .grid-list { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body onload="render()">
@@ -71,23 +84,23 @@
     <div class="container">
         <div class="header">
             <h1 id="main-title">Aethir와 함께 미래를 선점하라</h1>
-            <div id="sub-title" class="subtitle">본문 핵심 요약 및 스마트 검색 가이드</div>
+            <div id="sub-title" class="subtitle">전체 목차 핵심 요약 가이드</div>
         </div>
 
         <div class="buy-now-area">
-            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 종이책 구매하러 가기</a>
+            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 종이책 구매 (출간 예정)</a>
         </div>
 
         <div class="search-box">
             <input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()">
         </div>
         
-        <div id="list"></div>
+        <div id="list" class="grid-list"></div>
 
         <footer>
             <div id="footer-text" class="disclaimer">
                 <b>[비공식 커뮤니티 가이드 고지]</b><br>
-                본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다. 에이셔 재단의 공식 입장과는 무관하며 모든 투자의 책임은 본인에게 있습니다.
+                본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드이며 투자 책임은 본인에게 있습니다.
             </div>
         </footer>
     </div>
@@ -104,39 +117,20 @@
     <script>
         let currentLang = 'ko';
         const i18n = {
-            ko: { title: "Aethir와 함께 미래를 선점하라", sub: "본문 핵심 요약 및 스마트 검색 가이드", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔(Aethir) 생태계 연구를 위한 비공식 가이드입니다.", authorX: "김지호 X 계정" },
-            en: { title: "Seize the Future with Aethir", sub: "Core Summaries & Smart Search Guide", buy: "📙 Get the Printed Book", placeholder: "Search keywords (e.g., ARR, Node, June)", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This book and website are unofficial guides for studying the Aethir ecosystem.", authorX: "Author's X (Twitter)" }
+            ko: { title: "Aethir와 함께 미래를 선점하라", sub: "전체 목차 핵심 요약 가이드", buy: "📙 종이책 구매 (출간 예정)", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다." },
+            en: { title: "Seize the Future with Aethir", sub: "Full Content Summary Guide", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem." }
         };
 
         const data = [
-            { 
-                p: "p.6-11", 
-                t_ko: "들어가며 가치 투자의 3대 기준", t_en: "Intro: 3 Standards of Value Investing",
-                s_ko: "<ul><li><b>통찰력</b> 대표가 현장의 고민을 꿰뚫고 있는가?</li><li><b>실질 매출</b> ARR $166M 달성 등 가치 증명</li></ul>",
-                s_en: "<ul><li><b>Insight</b> Does the leadership understand the field?</li><li><b>Revenue</b> Proven value with $166M ARR</li></ul>",
-                l: [{n_ko: "공식 X 소식", n_en: "Official X", u: "https://x.com/AethirCloud"}] 
-            },
-            { 
-                p: "p.12-20", 
-                t_ko: "Chapter 1 에이셔 작동 원리", t_en: "Chapter 1: How Aethir Works",
-                s_ko: "<ul><li><b>공유 모델</b> 유휴 GPU를 연결하는 시스템</li><li><b>비용 혁신</b> 기존 클라우드 대비 최대 86% 저렴</li></ul>",
-                s_en: "<ul><li><b>Sharing Model</b> A system connecting idle GPUs</li><li><b>Cost Innovation</b> Up to 86% cheaper than legacy cloud</li></ul>",
-                l: [{n_ko: "에이셔 코리아 X", n_en: "Aethir Korea X", u: "https://x.com/Aethir_Korea"}] 
-            },
-            { 
-                p: "p.31-39", 
-                t_ko: "Chapter 2 보안관(체커노드) 보상", t_en: "Chapter 2: Sheriff (Checker Node) Rewards",
-                s_ko: "<ul><li><b>보안관</b> 네트워크 감시를 통한 품질 유지 역할</li><li><b>보상</b> 전체 ATH 공급량의 15% 배정</li></ul>",
-                s_en: "<ul><li><b>Sheriff</b> Roles maintaining quality via monitoring</li><li><b>Rewards</b> 15% of total ATH supply allocated</li></ul>",
-                l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] 
-            },
-            { 
-                p: "p.61-62", 
-                t_ko: "맺음말 미래 산업 선점", t_en: "Conclusion: Seizing Future Industries",
-                s_ko: "<ul><li><b>비전</b> AI와 웹3.0 시대의 핵심 인프라</li><li><b>교류</b> 저자와의 지속적인 소통</li></ul>",
-                s_en: "<ul><li><b>Vision</b> Core infrastructure for AI & Web3</li><li><b>Network</b> Stay connected with the author</li></ul>",
-                l: [{n_ko: "김지호 X 계정", n_en: "Author's X", u: "https://x.com/thejediworld77"}] 
-            }
+            { p: "p.6", t_ko: "들어가는 말", t_en: "Introduction", s_ko: "에이셔 생태계의 비전과 가치 투자의 기준 제시", s_en: "Vision of Aethir ecosystem and standards for value investing", l: [{n_ko: "공식 X", n_en: "Official X", u: "https://x.com/AethirCloud"}] },
+            { p: "p.12", t_ko: "Chapter 1 에이셔의 작동 원리", t_en: "Chapter 1: How Aethir Works", s_ko: "분산형 GPU 네트워크 및 86% 비용 절감 혁신", s_en: "Decentralized GPU networks and 86% cost reduction", l: [{n_ko: "공식 문서", n_en: "Docs", u: "https://docs.aethir.com/"}] },
+            { p: "p.21", t_ko: "Chapter 1 ARR 성과 및 혁신", t_en: "Chapter 1: ARR Performance", s_ko: "ARR $166M 달성 및 글로벌 클라우드 시장 점유", s_en: "Achieving $166M ARR and global cloud market share", l: [{n_ko: "대시보드", n_en: "Dashboard", u: "https://dashboard.aethir.com/"}] },
+            { p: "p.31", t_ko: "Chapter 2 X 홍보 및 커뮤니티", t_en: "Chapter 2: X Promo & Community", s_ko: "인포파이 활용 및 에이셔 코리아 활동 가이드", s_en: "Guide for Infopy and Aethir Korea activities", l: [{n_ko: "에이셔 코리아", n_en: "Aethir Korea", u: "https://x.com/Aethir_Korea"}] },
+            { p: "p.37", t_ko: "Chapter 2 체커노드 운영", t_en: "Chapter 2: Checker Node Op", s_ko: "품질 보안관 역할 및 전체 공급량 15% 보상 배정", s_en: "Sheriff role and 15% of supply allocated as rewards", l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] },
+            { p: "p.40", t_ko: "Chapter 2 스테이킹 가이드", t_en: "Chapter 2: Staking Guide", s_ko: "veATH, stATH 보상 및 에어드랍 참여 기회", s_en: "veATH, stATH rewards and airdrop opportunities", l: [{n_ko: "스테이킹 센터", n_en: "Stake Center", u: "https://user.aethir.com/stake"}] },
+            { p: "p.48", t_ko: "Chapter 3 에이셔와 젠트리 시너지", t_en: "Chapter 3: Synergy with Zentry", s_ko: "GPU 인프라와 게이밍 플랫폼의 만남", s_en: "Meeting of GPU infra and gaming platforms", l: [{n_ko: "젠트리 넥서스", n_en: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
+            { p: "p.51", t_ko: "Chapter 4 에이셔 엣지 및 투자 고려", t_en: "Chapter 4: Aethir Edge & Investing", s_ko: "엣지 기기 투자 포인트 및 환경별 고려사항", s_en: "Edge device investment points and considerations", l: [] },
+            { p: "p.61", t_ko: "맺음말", t_en: "Conclusion", s_ko: "미래 기술 흐름을 읽는 기회", s_en: "Opportunity to read future technology trends", l: [{n_ko: "김지호 X", n_en: "Author X", u: "https://x.com/thejediworld77"}] }
         ];
 
         function toggleLang() {
@@ -156,7 +150,7 @@
                 const card = document.createElement('div'); card.className = 'item-card';
                 card.onclick = () => {
                     document.getElementById('mTitle').innerText = d[`t_${currentLang}`] + " (" + d.p + ")";
-                    document.getElementById('mSummary').innerHTML = d[`s_${currentLang}`];
+                    document.getElementById('mSummary').innerHTML = "<ul><li>" + d[`s_${currentLang}`] + "</li></ul>";
                     document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l[`n_${currentLang}`]} ↗</a>`).join('');
                     document.getElementById('modal').style.display = 'block';
                 };

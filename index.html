@@ -57,7 +57,7 @@
     <div class="container">
         <div class="header">
             <h1>Aethir와 함께 미래를 선점하라</h1>
-            <div class="subtitle">본문 목차와 주요 내용 그리고 주요 링크</div>
+            <div class="subtitle">본문 핵심 요약 및 스마트 검색 가이드</div>
         </div>
         <div class="search-box"><input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()"></div>
         <div id="list"></div>
@@ -78,13 +78,13 @@
     </div>
     <script>
         const data = [
-            { p: "p.1-11", t: "들어가는 말 가치 투자의 3대 기준", s: "<ul><li><b>통찰력:</b> 대표가 현장의 고민을 꿰뚫고 있는가?</li><li><b>기술 엔진:</b> 약속을 구현할 검증된 기술적 토대</li><li><b>실질 매출:</b> ARR $166M 달성 등 가치 증명의 성적표</li></ul>", l: [{n: "공식 X 소식", u: "https://x.com/AethirCloud"}] },
-            { p: "p.12-20", t: "Chapter 1 에이셔 작동 원리", s: "<ul><li><b>공유 모델:</b> 유휴 GPU를 연결하는 '에어비앤비' 모델</li><li><b>비용 혁신:</b> 기존 클라우드 대비 최대 86% 비용 절감</li></ul>", l: [{n: "에이셔 코리아 X", u: "https://x.com/Aethir_Korea"}] },
-            { p: "p.21-31", t: "Chapter 1 압도적인 비즈니스 성과", s: "<ul><li><b>ARR:</b> 2026년 기준 1억 6,600만 달러 돌파</li><li><b>시장 위치:</b> 글로벌 DePIN 프로젝트 수익 1위</li></ul>", l: [{n: "매출 대시보드", u: "https://dashboard.aethir.com/protocol/overview"}] },
-            { p: "p.34-40", t: "Chapter 2 체커노드 및 엣지 가이드", s: "<ul><li><b>보상:</b> 전체 ATH 공급량의 15% 보안관 보상 배정</li><li><b>엣지:</b> 개인용 GPU 하드웨어 작업 수당 수령</li></ul>", l: [{n: "노드 가이드", u: "https://docs.aethir.com/checker-guide"}] },
-            { p: "p.41-48", t: "Chapter 2 스테이킹 전략", s: "<ul><li><b>수익률:</b> Gaming Pool 연이율 약 18.41% 제공</li><li><b>일정:</b> 2026년 6월 13일 eATH 환매 시작</li></ul>", l: [{n: "스테이킹 센터", u: "https://user.aethir.com/stake/pools?pool=gaming"}] },
-            { p: "p.49-61", t: "Chapter 4 AI 연합군과 확장", s: "<ul><li><b>AI Unbundled:</b> 필요한 부품만 골라 쓰는 기술 해체</li><li><b>Zentry:</b> 소셜 활동을 통한 보상 포인트 획득</li></ul>", l: [{n: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
-            { p: "p.62-63", t: "맺음말 미래 산업 선점", s: "<ul><li><b>GPU 자원:</b> AI 시대의 핵심 동력, 에이셔가 그 중심</li><li><b>결론:</b> 흐름을 읽는 자가 부가가치를 선점한다</li></ul>", l: [{n: "김지호 X 계정", u: "https://x.com/thejediworld77"}] }
+            { p: "p.6-11", t: "들어가는 말 가치 투자의 3대 기준", s: "<ul><li><b>통찰력</b> 대표가 현장의 고민을 꿰뚫고 있는가?</li><li><b>기술 엔진</b> 약속을 구현할 검증된 기술적 토대</li><li><b>실질 매출</b> ARR $166M 달성 등 가치 증명의 성적표</li></ul>", l: [{n: "공식 X 소식", u: "https://x.com/AethirCloud"}] },
+            { p: "p.12-20", t: "Chapter 1 에이셔 작동 원리", s: "<ul><li><b>공유 모델</b> 유휴 GPU를 연결하는 '에어비앤비' 모델</li><li><b>비용 혁신</b> 기존 클라우드 대비 최대 86% 비용 절감 (p.59 참조)</li></ul>", l: [{n: "에이셔 코리아 X", u: "https://x.com/Aethir_Korea"}] },
+            { p: "p.21-30", t: "Chapter 1 압도적인 비즈니스 성과", s: "<ul><li><b>ARR</b> 2026년 기준 1억 6,600만 달러 돌파</li><li><b>시장 위치</b> 글로벌 DePIN 프로젝트 수익 1위</li></ul>", l: [{n: "매출 대시보드", u: "https://dashboard.aethir.com/protocol/overview"}] },
+            { p: "p.31-39", t: "Chapter 2 체커노드 및 홍보 전략", s: "<ul><li><b>홍보</b> X계정 인포파이 활용 및 커뮤니티 활동 가이드</li><li><b>노드</b> 전체 ATH 공급량의 15% 보안관 보상 배정</li></ul>", l: [{n: "노드 가이드", u: "https://docs.aethir.com/checker-guide"}] },
+            { p: "p.40-47", t: "Chapter 2 스테이킹과 보상 체계", s: "<ul><li><b>수익률</b> Gaming Pool 연이율 등 보상 메커니즘</li><li><b>일정</b> 2026년 6월 13일 eATH 환매 시작</li></ul>", l: [{n: "스테이킹 센터", u: "https://user.aethir.com/stake/pools?pool=gaming"}] },
+            { p: "p.48-60", t: "Chapter 3 Aethir와 Zentry의 시너지", s: "<ul><li><b>웹3 게이밍</b> GPU 인프라와 게이밍 플랫폼의 만남</li><li><b>Zentry Nexus</b> 소셜 활동을 통한 보상 포인트 획득</li></ul>", l: [{n: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
+            { p: "p.61-62", t: "맺음말 미래 산업 선점", s: "<ul><li><b>산업 전망</b> AI와 웹3.0 시대의 핵심 GPU 클라우드</li><li><b>지속적 소통</b> 저자와의 교류를 통해 함께 성장하는 기회</li></ul>", l: [{n: "김지호 X 계정", u: "https://x.com/thejediworld77"}] }
         ];
         function render() {
             const q = document.getElementById('q').value.toLowerCase();

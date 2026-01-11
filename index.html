@@ -17,6 +17,7 @@
             overflow: hidden;
         }
 
+        /* 헤더 스타일 */
         header {
             width: 100%; min-height: 70px; padding: 10px 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -28,40 +29,45 @@
         .lang-switch { flex: 1; display: flex; justify-content: flex-end; }
         .lang-btn { background: var(--accent-color); color: white; border: 1px solid var(--primary-color); padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
 
+        /* 메인 분할 레이아웃 */
         .main-container { display: flex; height: 100vh; padding-top: 70px; width: 100%; }
 
+        /* 왼쪽 패널: 리스트 */
         .left-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; border-right: 1px solid #222; }
-        .guide-text { color: #888; font-size: 0.95rem; font-weight: 500; margin-bottom: 8px; text-align: left; }
-        .search-box { margin-bottom: 30px; position: sticky; top: 0; background: var(--bg-color); z-index: 10; }
-        input { width: 100%; padding: 16px 24px; border-radius: 40px; border: 1px solid var(--accent-color); background: #111; color: white; font-size: 1.1rem; outline: none; }
+        .guide-text { color: #888; font-size: 0.9rem; font-weight: 500; margin-bottom: 8px; text-align: left; }
+        .search-box { margin-bottom: 30px; position: sticky; top: 0; background: var(--bg-color); z-index: 10; padding-bottom: 10px; }
+        input { width: 100%; padding: 15px 22px; border-radius: 40px; border: 1px solid var(--accent-color); background: #111; color: white; font-size: 1.1rem; outline: none; }
 
         .list-container { display: flex; flex-direction: column; gap: 18px; }
         .item-card { background: var(--card-bg); padding: 22px; border-radius: 14px; text-align: left; cursor: pointer; border: 1px solid #222; transition: 0.3s; }
         .item-card:hover { border-color: var(--primary-color); transform: scale(1.02); }
-        .item-page { color: var(--primary-color); font-size: 0.85rem; font-weight: bold; }
+        .item-page { color: var(--primary-color); font-size: 0.8rem; font-weight: bold; }
         .item-title { font-size: 1.2rem; font-weight: 800; margin-top: 8px; color: #fff; }
 
+        /* 오른쪽 패널: 표지 */
         .right-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #090909; }
         .cover-box { width: 100%; max-width: 480px; position: relative; margin-bottom: 30px; }
         .cover-img { width: 100%; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.9); display: block; }
         .buy-now-btn { background: var(--buy-btn-color); color: white; padding: 18px 50px; border-radius: 60px; text-decoration: none; font-size: 1.2rem; font-weight: 900; box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4); animation: pulse 2s infinite; text-align: center; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* 모달 및 아코디언 스타일 */
+        /* 모달 및 상세 아코디언 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { background: #111; margin: 5% auto; padding: 30px; border-radius: 25px; width: 90%; max-width: 550px; border: 1px solid #333; position: relative; max-height: 85vh; overflow-y: auto; }
+        .modal-content { background: #111; margin: 5% auto; padding: 35px; border-radius: 25px; width: 90%; max-width: 550px; border: 1px solid #333; position: relative; max-height: 85vh; overflow-y: auto; }
         .modal-header { font-size: 1.4rem; color: var(--primary-color); font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         
-        details { margin-bottom: 10px; background: #1a1a1a; border-radius: 8px; padding: 5px 15px; border: 1px solid #222; }
+        details { margin-bottom: 10px; background: #1a1a1a; border-radius: 8px; padding: 2px 15px; border: 1px solid #222; }
         summary { 
-            padding: 10px 0; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: #fff; list-style: none; outline: none;
+            padding: 12px 0; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: #eee; list-style: none; outline: none;
             display: flex; justify-content: space-between; align-items: center;
         }
         summary::after { content: '▼'; font-size: 0.7rem; color: var(--primary-color); transition: 0.3s; }
-        details[open] summary::after { transform: rotate(180deg); }
-        .summary-content { padding: 5px 0 15px 15px; font-size: 0.95rem; color: #ccc; line-height: 1.7; border-top: 1px solid #222; margin-top: 5px; }
+        details[open] summary::after { transform: rotate(180deg); color: #fff; }
+        
+        .summary-content { padding: 10px 0 15px 5px; font-size: 0.98rem; color: #bbb; line-height: 1.8; border-top: 1px solid #222; margin-top: 5px; }
         .summary-content b { color: var(--primary-color); }
 
-        .action-btn { background: var(--primary-color); color: #000; padding: 15px; border-radius: 10px; text-decoration: none; font-size: 1rem; font-weight: 800; display: block; text-align: center; margin-top: 20px; }
+        .action-btn { background: var(--primary-color); color: #000; padding: 15px; border-radius: 10px; text-decoration: none; font-size: 1rem; font-weight: 800; display: block; text-align: center; margin-top: 25px; }
         .close-x { float: right; color: #777; font-size: 35px; cursor: pointer; }
         .footer-content { margin-top: 60px; text-align: center; opacity: 0.6; font-size: 0.85rem; line-height: 1.8; color: #aaa; }
 
@@ -73,7 +79,6 @@
             .left-panel, .right-panel { width: 100%; height: auto; overflow: visible; border: none; padding: 25px; }
             .right-panel { order: -1; padding-top: 20px; }
             .cover-box { max-width: 320px; }
-            .guide-text { margin-top: 20px; }
         }
     </style>
 </head>
@@ -121,39 +126,21 @@
     <script>
         let currentLang = 'ko';
         const i18n = {
-            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", sub: "* 챕터를 클릭하면 상세 핵심 요약이 나타납니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved.", subheading_title: "챕터 소제목 목록" },
-            en: { title: "Seize the Future with Aethir", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", sub: "* Click a chapter to see core summaries.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>All investment responsibility lies with the individual.<br>© 2026 Jiho Kim. All Rights Reserved.", subheading_title: "Chapter Subheadings" }
+            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", sub: "* 챕터를 클릭하면 상세 핵심 요약이 나타납니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved.", subheading_title: "챕터 상세 가이드" },
+            en: { title: "Seize the Future with Aethir", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", sub: "* Click a chapter to see core summaries.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>All investment responsibility lies with the individual.<br>© 2026 Jiho Kim. All Rights Reserved.", subheading_title: "Chapter Details" }
         };
 
         const data = [
             { 
                 p: "p.6-11", t_ko: "들어가는 말  가치 투자 기준 3가지", t_en: "Introduction  3 Standards of Value Investing", 
                 subs: [
-                    { t_ko: "· 1. 통찰력", t_en: "· 1. Insight", c_ko: "CEO가 <b>현장의 문제(GPU 공급 부족)</b>를 직접 겪어보고 해결하려는 절실함이 있는지가 가치 투자의 첫 번째 기준입니다.", c_en: "The first standard is whether the CEO has experienced <b>field problems</b> (GPU shortage) and has the urgency to solve them." },
-                    { t_ko: "· 2. 기술력", t_en: "· 2. Tech", c_ko: "말뿐인 설계도가 아니라 <b>실제로 구동되는 분산형 클라우드 엔진</b>을 갖췄는지 확인해야 합니다.", c_en: "It's not about blueprints; it's about having a <b>proven decentralized cloud engine</b> that actually delivers." },
-                    { t_ko: "· 3. 실질 매출", t_en: "· 3. Revenue", c_ko: "투자금으로 연명하는 것이 아닌, <b>ARR(연간 반복 매출)</b>을 통해 시장의 수요를 증명하는 프로젝트가 옥석입니다.", c_en: "The gems are projects that prove market demand through <b>ARR (Annual Recurring Revenue)</b>, not just living on investments." }
+                    { t_ko: "· 1. 통찰력", t_en: "· 1. Insight", c_ko: "CEO가 <b>현장의 문제(GPU 공급 부족)</b>를 직접 겪어보고 해결하려는 절실함이 있는지가 가치 투자의 첫 번째 기준입니다.", c_en: "Does the leader understand field problems? True insight comes from personal experience solving the GPU shortage." },
+                    { t_ko: "· 2. 기술력", t_en: "· 2. Tech", c_ko: "말뿐인 설계도가 아니라 <b>실제로 구동되는 분산형 클라우드 엔진</b>을 갖췄는지 확인해야 합니다.", c_en: "Not just a blueprint, but a <b>proven decentralized cloud engine</b> that actually delivers on its promises." },
+                    { t_ko: "· 3. 실질 매출", t_en: "· 3. Revenue", c_ko: "투자금으로 연명하는 것이 아닌, <b>ARR(연간 반복 매출)</b>을 통해 시장의 실질 수요를 증명하고 있는지 확인하세요.", c_en: "Does it prove demand through <b>ARR (Annual Recurring Revenue)</b>, rather than just surviving on investment funds?" }
                 ],
                 l: [{n_ko: "공식 X 소식", n_en: "Official X", u: "https://x.com/AethirCloud"}] 
             },
             { 
                 p: "p.12-30", t_ko: "Chapter 1  에이셔 작동 원리 및 성과", t_en: "Chapter 1  Principles & Results", 
                 subs: [
-                    { t_ko: "· AI 시대의 GPU 부족 문제 해결", t_en: "· Solving GPU Shortage", c_ko: "폭발적인 AI 수요 대비 엔비디아 칩 공급 부족을 <b>전 세계 유휴 자원 통합</b>으로 해결합니다.", c_en: "Solves the NVIDIA chip shortage by <b>aggregating idle resources</b> globally to meet explosive AI demand." },
-                    { t_ko: "· 1억 5천만 달러 ARR 달성", t_en: "· Achieving $150M+ ARR", c_ko: "단순한 기술 기대를 넘어 <b>실질적인 매출 성적표</b>로 비즈니스 모델의 가치를 입증했습니다.", c_en: "Beyond tech hype, they proved business value with a <b>real revenue report card</b> of over $150M." },
-                    { t_ko: "· 94개국 분산 인프라", t_en: "· Infrastructure in 94 Countries", c_ko: "중앙화된 데이터 센터의 한계를 넘어 <b>전 세계 94개국에 흩어진 노드</b>들이 힘을 합칩니다.", c_en: "Overcoming centralized data center limits, nodes across <b>94 countries</b> join forces." }
-                ],
-                l: [{n_ko: "실시간 대시보드", n_en: "Live Dashboard", u: "https://dashboard.aethir.com/"}] 
-            },
-            { 
-                p: "p.31-47", t_ko: "Chapter 2  실전 투자 및 스테이킹", t_en: "Chapter 2  Investing & Staking", 
-                subs: [
-                    { t_ko: "· 체커노드(보안관) 운영하기", t_en: "· Operating Checker Nodes", c_ko: "네트워크 품질을 감시하는 보안관 역할로, <b>전체 토큰의 15% 보상</b>이 이곳에 배정됩니다.", c_en: "Sheriffs monitoring network quality; <b>15% of total tokens</b> are allocated here as rewards." },
-                    { t_ko: "· 스테이킹의 모든 것(veATH, stATH)", t_en: "· Deep Dive into Staking", c_ko: "단순 보유가 아니라 <b>네트워크 기여도</b>에 따라 추가 수익과 에어드랍 기회를 얻는 방법입니다.", c_en: "How to gain extra yield and airdrop opportunities based on <b>network contribution</b>, not just holding." }
-                ],
-                l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] 
-            },
-            { 
-                p: "p.52-60", t_ko: "Chapter 4  AI의 미래와 확장성", t_en: "Chapter 4  Future & Scalability", 
-                subs: [
-                    { t_ko: "· 86% 비용 절감의 기적", t_en: "· 86% Cost Miracle", c_ko: "기존 아마존(AWS) 등 대형 클라우드 대비 <b>최대 86% 저렴한 비용</b>으로 AI 엔진을 공급합니다.", c_en: "Providing AI engines at <b>up to 86% lower costs</b> compared to big cloud providers like AWS." },
-                    { t_ko: "· 중앙 독재보다 안전한 분산 보안", t_en: "· Decentralized Security", c_ko: "한 곳이 해킹당하면 마비되는 시스템이 아니라, <b>수만 개의 이웃 노드</b>가 정보를 나눠 보관해 안전합니다.", c_en: "Not a system
+                    { t_ko: "· AI 시대의 GPU 부족 문제 해결", t_en: "· Solving GPU Shortage", c_ko: "

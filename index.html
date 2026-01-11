@@ -16,95 +16,47 @@
             min-height: 100vh;
         }
         .container { width: 100%; max-width: 800px; text-align: center; }
-        
-        /* 한영 버튼 */
         .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 1000; }
-        .lang-btn {
-            background: var(--accent-color); color: white; border: 1px solid var(--primary-color);
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold;
-        }
-
-        .header { margin: 20px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; }
-        h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; }
-        .subtitle { font-size: 1rem; color: #fff; margin-top: 10px; font-weight: 600; }
+        .lang-btn { background: var(--accent-color); color: white; border: 1px solid var(--primary-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold; }
         
-        .buy-now-area { margin: 20px 0; }
-        .buy-now-btn {
-            background: var(--buy-btn-color); color: white; padding: 12px 25px;
-            border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 800;
-            display: inline-block; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
-            transition: 0.3s; animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-
-        .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; }
-        input {
-            width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--accent-color);
-            background: rgba(26, 26, 26, 0.98); color: white; font-size: 1rem; box-sizing: border-box;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-        }
-
-        /* 카드 그리드 - 데스크톱에서 2열 배치 가능 */
-        .grid-list {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px; width: 100%;
-        }
-        .item-card {
-            background: var(--card-bg); padding: 15px; border-radius: 12px;
-            text-align: left; cursor: pointer; border: 1px solid #222; transition: 0.2s;
-        }
+        .cover-container { position: relative; width: 100%; max-width: 600px; margin: 20px auto 30px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .cover-image { width: 100%; display: block; }
+        .buy-icon-btn { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--buy-btn-color); color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.03); } 100% { transform: translateX(-50%) scale(1); } }
+        
+        .subtitle { font-size: 1rem; color: #fff; margin-bottom: 20px; font-weight: 600; }
+        .search-box { position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; width: 100%; }
+        input { width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--accent-color); background: rgba(26,26,26,0.98); color: white; font-size: 1rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+        
+        .grid-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; width: 100%; }
+        .item-card { background: var(--card-bg); padding: 15px; border-radius: 12px; text-align: left; cursor: pointer; border: 1px solid #222; }
         .item-card:hover { border-color: var(--primary-color); background: #222; }
         .item-page { color: var(--primary-color); font-size: 0.7rem; font-weight: bold; }
-        .item-title { font-size: 1rem; font-weight: 800; margin-top: 5px; color: #fff; line-height: 1.4; }
+        .item-title { font-size: 1rem; font-weight: 800; margin-top: 5px; color: #fff; }
         
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
-        .modal-content { background: #111; margin: 5% auto; padding: 25px; border-radius: 20px; width: 85%; max-width: 500px; border: 1px solid #333; }
-        .modal-header { font-size: 1.2rem; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
+        .modal-content { background: #111; margin: 5% auto; padding: 25px; border-radius: 20px; width: 85%; max-width: 500px; border: 1px solid #333; position: relative; }
+        .modal-header { font-size: 1.2rem; color: var(--primary-color); font-weight: 800; margin-bottom: 10px; }
         .modal-summary { font-size: 0.9rem; color: #eee; line-height: 1.7; margin-bottom: 20px; }
-        .modal-summary ul { padding-left: 18px; }
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
         .action-btn { background: var(--primary-color); color: #000; padding: 10px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 800; flex: 1; text-align: center; }
         .close-x { float: right; color: #555; font-size: 28px; cursor: pointer; }
-        
-        footer { margin-top: 40px; padding: 20px; border-top: 1px solid #222; width: 100%; }
-        .disclaimer { font-size: 0.7rem; color: #666; line-height: 1.5; text-align: center; }
+        footer { margin-top: 40px; padding: 20px; border-top: 1px solid #222; width: 100%; font-size: 0.7rem; color: #666; text-align: center; }
 
-        @media (max-width: 600px) {
-            .lang-switch { top: 10px; right: 10px; }
-            h1 { font-size: 1.2rem; }
-            .grid-list { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .grid-list { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body onload="render()">
-    <div class="lang-switch">
-        <button class="lang-btn" onclick="toggleLang()">KO / EN</button>
-    </div>
-
+    <div class="lang-switch"><button class="lang-btn" onclick="toggleLang()">KO / EN</button></div>
     <div class="container">
-        <div class="header">
-            <h1 id="main-title">Aethir와 함께 미래를 선점하라</h1>
-            <div id="sub-title" class="subtitle">전체 목차 핵심 요약 가이드</div>
+        <div class="cover-container">
+            <img src="Aethir%20최종%20겉표지.jpg" alt="Aethir Book Cover" class="cover-image">
+            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-icon-btn">📙 <span id="buy-text">종이책 주문하기 (출간 예정)</span></a>
         </div>
-
-        <div class="buy-now-area">
-            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 종이책 구매 (출간 예정)</a>
-        </div>
-
-        <div class="search-box">
-            <input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()">
-        </div>
-        
+        <div id="sub-title" class="subtitle">전체 목차 핵심 요약 가이드</div>
+        <div class="search-box"><input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()"></div>
         <div id="list" class="grid-list"></div>
-
-        <footer>
-            <div id="footer-text" class="disclaimer">
-                <b>[비공식 커뮤니티 가이드 고지]</b><br>
-                본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드이며 투자 책임은 본인에게 있습니다.
-            </div>
-        </footer>
+        <footer><div id="footer-text"><b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.</div></footer>
     </div>
-
     <div id="modal" class="modal" onclick="closeM(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-x" onclick="document.getElementById('modal').style.display='none'">&times;</span>
@@ -113,47 +65,27 @@
             <div id="mLinks" class="btn-group"></div>
         </div>
     </div>
-
     <script>
         let currentLang = 'ko';
         const i18n = {
-            ko: { title: "Aethir와 함께 미래를 선점하라", sub: "전체 목차 핵심 요약 가이드", buy: "📙 종이책 구매 (출간 예정)", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다." },
-            en: { title: "Seize the Future with Aethir", sub: "Full Content Summary Guide", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem." }
+            ko: { sub: "전체 목차 핵심 요약 가이드", buy: "종이책 주문하기 (출간 예정)", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다." },
+            en: { sub: "Full Content Summary Guide", buy: "Order Printed Book (Coming Soon)", placeholder: "Search keywords (e.g., ARR, Node)", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem." }
         };
-
         const data = [
-            { p: "p.6", t_ko: "들어가는 말", t_en: "Introduction", s_ko: "에이셔 생태계의 비전과 가치 투자의 기준 제시", s_en: "Vision of Aethir ecosystem and standards for value investing", l: [{n_ko: "공식 X", n_en: "Official X", u: "https://x.com/AethirCloud"}] },
-            { p: "p.12", t_ko: "Chapter 1 에이셔의 작동 원리", t_en: "Chapter 1: How Aethir Works", s_ko: "분산형 GPU 네트워크 및 86% 비용 절감 혁신", s_en: "Decentralized GPU networks and 86% cost reduction", l: [{n_ko: "공식 문서", n_en: "Docs", u: "https://docs.aethir.com/"}] },
-            { p: "p.21", t_ko: "Chapter 1 ARR 성과 및 혁신", t_en: "Chapter 1: ARR Performance", s_ko: "ARR $166M 달성 및 글로벌 클라우드 시장 점유", s_en: "Achieving $166M ARR and global cloud market share", l: [{n_ko: "대시보드", n_en: "Dashboard", u: "https://dashboard.aethir.com/"}] },
-            { p: "p.31", t_ko: "Chapter 2 X 홍보 및 커뮤니티", t_en: "Chapter 2: X Promo & Community", s_ko: "인포파이 활용 및 에이셔 코리아 활동 가이드", s_en: "Guide for Infopy and Aethir Korea activities", l: [{n_ko: "에이셔 코리아", n_en: "Aethir Korea", u: "https://x.com/Aethir_Korea"}] },
-            { p: "p.37", t_ko: "Chapter 2 체커노드 운영", t_en: "Chapter 2: Checker Node Op", s_ko: "품질 보안관 역할 및 전체 공급량 15% 보상 배정", s_en: "Sheriff role and 15% of supply allocated as rewards", l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] },
-            { p: "p.40", t_ko: "Chapter 2 스테이킹 가이드", t_en: "Chapter 2: Staking Guide", s_ko: "veATH, stATH 보상 및 에어드랍 참여 기회", s_en: "veATH, stATH rewards and airdrop opportunities", l: [{n_ko: "스테이킹 센터", n_en: "Stake Center", u: "https://user.aethir.com/stake"}] },
-            { p: "p.48", t_ko: "Chapter 3 에이셔와 젠트리 시너지", t_en: "Chapter 3: Synergy with Zentry", s_ko: "GPU 인프라와 게이밍 플랫폼의 만남", s_en: "Meeting of GPU infra and gaming platforms", l: [{n_ko: "젠트리 넥서스", n_en: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
-            { p: "p.51", t_ko: "Chapter 4 에이셔 엣지 및 투자 고려", t_en: "Chapter 4: Aethir Edge & Investing", s_ko: "엣지 기기 투자 포인트 및 환경별 고려사항", s_en: "Edge device investment points and considerations", l: [] },
-            { p: "p.61", t_ko: "맺음말", t_en: "Conclusion", s_ko: "미래 기술 흐름을 읽는 기회", s_en: "Opportunity to read future technology trends", l: [{n_ko: "김지호 X", n_en: "Author X", u: "https://x.com/thejediworld77"}] }
+            { p: "p.6", t_ko: "들어가는 말", t_en: "Introduction", s_ko: "에이셔 생태계의 비전과 가치 투자의 3대 기준", s_en: "Vision of Aethir ecosystem and 3 standards of investing", l: [{n_ko: "공식 X", n_en: "Official X", u: "https://x.com/AethirCloud"}] },
+            { p: "p.12-30", t_ko: "Chapter 1 에이셔의 원리 및 성과", t_en: "Chapter 1: Principles & Results", s_ko: "분산형 GPU 인프라와 ARR $166M 달성 기록", s_en: "Decentralized GPU infra and $166M ARR milestone", l: [{n_ko: "대시보드", n_en: "Dashboard", u: "https://dashboard.aethir.com/"}] },
+            { p: "p.31-47", t_ko: "Chapter 2 실전 투자 및 스테이킹", t_en: "Chapter 2: Investing & Staking", s_ko: "체커노드(보안관) 운영 및 15% 보상 체계", s_en: "Checker Node ops and 15% reward allocation", l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] },
+            { p: "p.48-51", t_ko: "Chapter 3 젠트리 시너지", t_en: "Chapter 3: Zentry Synergy", s_ko: "GPU 인프라와 소셜 게이밍 플랫폼의 결합", s_en: "Combination of GPU infra and social gaming platforms", l: [{n_ko: "Zentry Nexus", n_en: "Zentry Nexus", u: "https://nexus.zentry.com/"}] },
+            { p: "p.52-60", t_ko: "Chapter 4 AI의 미래와 확장", t_en: "Chapter 4: Future of AI", s_ko: "기존 클라우드 대비 86% 저렴한 비용의 기적", s_en: "The miracle of 86% lower costs than legacy cloud", l: [] },
+            { p: "p.61-62", t_ko: "맺음말", t_en: "Conclusion", s_ko: "미래 기술 흐름을 읽는 저자와의 교류", s_en: "Stay connected with the author for future trends", l: [{n_ko: "김지호 X", n_en: "Author X", u: "https://x.com/thejediworld77"}] }
         ];
-
-        function toggleLang() {
-            currentLang = (currentLang === 'ko') ? 'en' : 'ko';
-            document.getElementById('main-title').innerText = i18n[currentLang].title;
-            document.getElementById('sub-title').innerText = i18n[currentLang].sub;
-            document.getElementById('buy-btn').innerText = i18n[currentLang].buy;
-            document.getElementById('q').placeholder = i18n[currentLang].placeholder;
-            document.getElementById('footer-text').innerHTML = i18n[currentLang].footer;
-            render();
-        }
-
+        function toggleLang() { currentLang = (currentLang === 'ko') ? 'en' : 'ko'; document.getElementById('sub-title').innerText = i18n[currentLang].sub; document.getElementById('buy-text').innerText = i18n[currentLang].buy; document.getElementById('q').placeholder = i18n[currentLang].placeholder; document.getElementById('footer-text').innerHTML = i18n[currentLang].footer; render(); }
         function render() {
             const q = document.getElementById('q').value.toLowerCase();
             const list = document.getElementById('list'); list.innerHTML = "";
             data.filter(d => d[`t_${currentLang}`].toLowerCase().includes(q) || d[`s_${currentLang}`].toLowerCase().includes(q)).forEach(d => {
                 const card = document.createElement('div'); card.className = 'item-card';
-                card.onclick = () => {
-                    document.getElementById('mTitle').innerText = d[`t_${currentLang}`] + " (" + d.p + ")";
-                    document.getElementById('mSummary').innerHTML = "<ul><li>" + d[`s_${currentLang}`] + "</li></ul>";
-                    document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l[`n_${currentLang}`]} ↗</a>`).join('');
-                    document.getElementById('modal').style.display = 'block';
-                };
+                card.onclick = () => { document.getElementById('mTitle').innerText = d[`t_${currentLang}`] + " (" + d.p + ")"; document.getElementById('mSummary').innerHTML = "<ul><li>" + d[`s_${currentLang}`] + "</li></ul>"; document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l[`n_${currentLang}`]} ↗</a>`).join(''); document.getElementById('modal').style.display = 'block'; };
                 card.innerHTML = `<span class="item-page">${d.p}</span><div class="item-title">${d[`t_${currentLang}`]}</div>`;
                 list.appendChild(card);
             });

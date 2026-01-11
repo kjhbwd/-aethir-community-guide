@@ -45,21 +45,24 @@
         .cover-box { width: 100%; max-width: 480px; position: relative; margin-bottom: 30px; }
         .cover-img { width: 100%; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.9); display: block; }
         .buy-now-btn { background: var(--buy-btn-color); color: white; padding: 18px 50px; border-radius: 60px; text-decoration: none; font-size: 1.2rem; font-weight: 900; box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4); animation: pulse 2s infinite; text-align: center; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
+        /* 모달 및 아코디언 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { background: #111; margin: 5% auto; padding: 40px; border-radius: 25px; width: 90%; max-width: 550px; border: 1px solid #333; position: relative; }
-        .modal-header { font-size: 1.5rem; color: var(--primary-color); font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .modal-content { background: #111; margin: 5% auto; padding: 30px; border-radius: 25px; width: 90%; max-width: 550px; border: 1px solid #333; position: relative; max-height: 85vh; overflow-y: auto; }
+        .modal-header { font-size: 1.4rem; color: var(--primary-color); font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         
-        /* 목록 스타일에서 점 표시(bullets) 제거 */
-        .modal-summary { font-size: 1.05rem; color: #eee; line-height: 1.8; margin-bottom: 30px; }
-        .modal-summary b { color: var(--primary-color); }
-        .modal-summary ul { padding-left: 0; list-style: none; } /* 점 표시 제거 및 여백 삭제 */
-        .modal-summary li { margin-bottom: 12px; }
-        
-        .action-btn { background: var(--primary-color); color: #000; padding: 15px; border-radius: 10px; text-decoration: none; font-size: 1rem; font-weight: 800; display: block; text-align: center; }
-        .close-x { float: right; color: #777; font-size: 35px; cursor: pointer; }
+        details { margin-bottom: 10px; background: #1a1a1a; border-radius: 8px; padding: 5px 15px; border: 1px solid #222; }
+        summary { 
+            padding: 10px 0; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: #fff; list-style: none; outline: none;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        summary::after { content: '▼'; font-size: 0.7rem; color: var(--primary-color); transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .summary-content { padding: 5px 0 15px 15px; font-size: 0.95rem; color: #ccc; line-height: 1.7; border-top: 1px solid #222; margin-top: 5px; }
+        .summary-content b { color: var(--primary-color); }
 
+        .action-btn { background: var(--primary-color); color: #000; padding: 15px; border-radius: 10px; text-decoration: none; font-size: 1rem; font-weight: 800; display: block; text-align: center; margin-top: 20px; }
+        .close-x { float: right; color: #777; font-size: 35px; cursor: pointer; }
         .footer-content { margin-top: 60px; text-align: center; opacity: 0.6; font-size: 0.85rem; line-height: 1.8; color: #aaa; }
 
         @media (max-width: 900px) {
@@ -118,50 +121,39 @@
     <script>
         let currentLang = 'ko';
         const i18n = {
-            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", sub: "* 챕터를 클릭하면 상세 핵심 요약이 나타납니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved." },
-            en: { title: "Seize the Future with Aethir", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", sub: "* Click a chapter to see details.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>All investment responsibility lies with the individual.<br>© 2026 Jiho Kim. All Rights Reserved." }
+            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", sub: "* 챕터를 클릭하면 상세 핵심 요약이 나타납니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved.", subheading_title: "챕터 소제목 목록" },
+            en: { title: "Seize the Future with Aethir", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", sub: "* Click a chapter to see core summaries.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>All investment responsibility lies with the individual.<br>© 2026 Jiho Kim. All Rights Reserved.", subheading_title: "Chapter Subheadings" }
         };
+
         const data = [
             { 
-                p: "p.6-11", t_ko: "들어가는 말: 가치 투자 기준 3가지", t_en: "Intro: 3 Standards of Value Investing", 
-                s_ko: "<b>핵심 가치 투자 기준</b><ul><li>1. 통찰력: 대표가 현장의 고민을 꿰뚫고 있는가?</li><li>2. 기술력: 약속을 구현할 검증된 엔진인가?</li><li>3. 실질 매출: 세상이 필요로 하는 가치를 증명하는가?</li></ul>", 
-                s_en: "<b>Core Investment Standards</b><ul><li>1. Insight: Does the leader understand field problems?</li><li>2. Tech: Is it a proven engine that delivers?</li><li>3. Revenue: Does it prove value through real sales?</li></ul>", 
+                p: "p.6-11", t_ko: "들어가는 말  가치 투자 기준 3가지", t_en: "Introduction  3 Standards of Value Investing", 
+                subs: [
+                    { t_ko: "· 1. 통찰력", t_en: "· 1. Insight", c_ko: "CEO가 <b>현장의 문제(GPU 공급 부족)</b>를 직접 겪어보고 해결하려는 절실함이 있는지가 가치 투자의 첫 번째 기준입니다.", c_en: "The first standard is whether the CEO has experienced <b>field problems</b> (GPU shortage) and has the urgency to solve them." },
+                    { t_ko: "· 2. 기술력", t_en: "· 2. Tech", c_ko: "말뿐인 설계도가 아니라 <b>실제로 구동되는 분산형 클라우드 엔진</b>을 갖췄는지 확인해야 합니다.", c_en: "It's not about blueprints; it's about having a <b>proven decentralized cloud engine</b> that actually delivers." },
+                    { t_ko: "· 3. 실질 매출", t_en: "· 3. Revenue", c_ko: "투자금으로 연명하는 것이 아닌, <b>ARR(연간 반복 매출)</b>을 통해 시장의 수요를 증명하는 프로젝트가 옥석입니다.", c_en: "The gems are projects that prove market demand through <b>ARR (Annual Recurring Revenue)</b>, not just living on investments." }
+                ],
                 l: [{n_ko: "공식 X 소식", n_en: "Official X", u: "https://x.com/AethirCloud"}] 
             },
             { 
-                p: "p.12-30", t_ko: "Chapter 1: 에이셔 작동 원리 및 성과", t_en: "Chapter 1: Principles & Results", 
-                s_ko: "<b>챕터 소제목 목록</b><ul><li>Aethir, AI 시대의 GPU 부족 문제를 해결하다</li><li>Aethir를 이끄는 두 핵심 인물 (Mark Rydon & Daniel Wang)</li><li>Aethir, 1억 5천만 달러 규모의 ARR 달성</li><li>Aethir, 94개국에 걸친 GPU 네트워크로 클라우드 혁신</li><li>생태계의 근간을 이루는 Aethir의 ATH 토큰</li></ul>", 
-                s_en: "<b>Subheadings</b><ul><li>Aethir solves GPU shortage in the AI era</li><li>Two key figures leading Aethir</li><li>Achieving $150M+ ARR (Proven growth)</li><li>Cloud innovation with GPU networks in 94 countries</li><li>ATH Token: The foundation of the ecosystem</li></ul>", 
+                p: "p.12-30", t_ko: "Chapter 1  에이셔 작동 원리 및 성과", t_en: "Chapter 1  Principles & Results", 
+                subs: [
+                    { t_ko: "· AI 시대의 GPU 부족 문제 해결", t_en: "· Solving GPU Shortage", c_ko: "폭발적인 AI 수요 대비 엔비디아 칩 공급 부족을 <b>전 세계 유휴 자원 통합</b>으로 해결합니다.", c_en: "Solves the NVIDIA chip shortage by <b>aggregating idle resources</b> globally to meet explosive AI demand." },
+                    { t_ko: "· 1억 5천만 달러 ARR 달성", t_en: "· Achieving $150M+ ARR", c_ko: "단순한 기술 기대를 넘어 <b>실질적인 매출 성적표</b>로 비즈니스 모델의 가치를 입증했습니다.", c_en: "Beyond tech hype, they proved business value with a <b>real revenue report card</b> of over $150M." },
+                    { t_ko: "· 94개국 분산 인프라", t_en: "· Infrastructure in 94 Countries", c_ko: "중앙화된 데이터 센터의 한계를 넘어 <b>전 세계 94개국에 흩어진 노드</b>들이 힘을 합칩니다.", c_en: "Overcoming centralized data center limits, nodes across <b>94 countries</b> join forces." }
+                ],
                 l: [{n_ko: "실시간 대시보드", n_en: "Live Dashboard", u: "https://dashboard.aethir.com/"}] 
             },
             { 
-                p: "p.31-47", t_ko: "Chapter 2: 실전 투자 및 스테이킹", t_en: "Chapter 2: Investing & Staking", 
-                s_ko: "<b>챕터 소제목 목록</b><ul><li>X계정에 Aethir를 홍보하기 (인포파이)</li><li>Aethir 엣지 기기 투자 및 ATH 할당량 변경</li><li>Aethir 체커노드(보안관) 운영하기</li><li>Aethir 스테이킹: 네트워크 참여의 시작</li><li>Aethir 스테이킹의 모든 것 (veATH, stATH)</li><li>ATH 토큰의 새로운 활용법 (재스테이킹)</li></ul>", 
-                s_en: "<b>Subheadings</b><ul><li>Promoting Aethir on X (Infopy)</li><li>Edge device investment & ATH allocation changes</li><li>Operating Aethir Checker Nodes (Sheriff)</li><li>Aethir Staking: Beyond simple investment</li><li>Deep dive into Staking (veATH, stATH)</li><li>New ways to use ATH (Restaking campaigns)</li></ul>", 
+                p: "p.31-47", t_ko: "Chapter 2  실전 투자 및 스테이킹", t_en: "Chapter 2  Investing & Staking", 
+                subs: [
+                    { t_ko: "· 체커노드(보안관) 운영하기", t_en: "· Operating Checker Nodes", c_ko: "네트워크 품질을 감시하는 보안관 역할로, <b>전체 토큰의 15% 보상</b>이 이곳에 배정됩니다.", c_en: "Sheriffs monitoring network quality; <b>15% of total tokens</b> are allocated here as rewards." },
+                    { t_ko: "· 스테이킹의 모든 것(veATH, stATH)", t_en: "· Deep Dive into Staking", c_ko: "단순 보유가 아니라 <b>네트워크 기여도</b>에 따라 추가 수익과 에어드랍 기회를 얻는 방법입니다.", c_en: "How to gain extra yield and airdrop opportunities based on <b>network contribution</b>, not just holding." }
+                ],
                 l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] 
             },
             { 
-                p: "p.48-51", t_ko: "Chapter 3: Zentry 시너지 및 보상", t_en: "Chapter 3: Zentry Synergy & Rewards", 
-                s_ko: "<b>챕터 소제목 목록</b><ul><li>Aethir와 Zentry의 시너지: 웹3.0 게이밍 플랫폼</li><li>Aethir 홍보하고 에어드랍 받자 (Zentry Nexus)</li><li>Aethir 스테이커를 위한 특별 혜택</li></ul>", 
-                s_en: "<b>Subheadings</b><ul><li>Synergy with Zentry: Web3 Gaming</li><li>Promo & Airdrop (Zentry Nexus rewards)</li><li>Special benefits for Aethir Stakers</li></ul>", 
-                l: [{n_ko: "젠트리 넥서스", n_en: "Zentry Nexus", u: "https://nexus.zentry.com/"}] 
-            },
-            { 
-                p: "p.52-60", t_ko: "Chapter 4: AI의 미래와 확장성", t_en: "Chapter 4: Future & Scalability", 
-                s_ko: "<b>챕터 소제목 목록</b><ul><li>실리콘밸리의 담장을 넘는 86%의 기적 (비용 절감)</li><li>우리 집 게임기와 앱 속에 숨은 AI의 정체</li><li>한 명의 독재자보다 수만 명의 이웃이 안전합니다 (보안)</li></ul>", 
-                s_en: "<b>Subheadings</b><ul><li>The 86% miracle: Breaking Silicon Valley walls</li><li>The identity of AI hidden in home gadgets & apps</li><li>Decentralized safety: Better than a single dictator</li></ul>", 
-                l: [] 
-            },
-            { 
-                p: "p.61-62", t_ko: "맺음말: 미래 산업 선점", t_en: "Conclusion: Leading the Industry", 
-                s_ko: "<b>핵심 요약</b><ul><li>미래 기술 흐름을 읽는 자가 얻게 될 기회</li><li>지속적인 교류를 통한 공동 성장</li><li>저자(김지호)와의 소통 채널</li></ul>", 
-                s_en: "<b>Key Takeaways</b><ul><li>Opportunities for those who read tech trends</li><li>Growing together through continuous exchange</li><li>Connect with the author (Jiho Kim)</li></ul>", 
-                l: [{n_ko: "저자 X 계정", n_en: "Author's X", u: "https://x.com/thejediworld77"}] 
-            }
-        ];
-        function toggleLang() { currentLang = (currentLang === 'ko') ? 'en' : 'ko'; document.getElementById('main-title').innerText = i18n[currentLang].title; document.getElementById('buy-btn').innerText = i18n[currentLang].buy; document.getElementById('q').placeholder = i18n[currentLang].placeholder; document.getElementById('sub-guide').innerText = i18n[currentLang].sub; document.getElementById('footer-text').innerHTML = i18n[currentLang].footer; render(); }
-        function render() { const q = document.getElementById('q').value.toLowerCase(); const list = document.getElementById('list'); list.innerHTML = ""; data.filter(d => d[`t_${currentLang}`].toLowerCase().includes(q) || d[`s_${currentLang}`].toLowerCase().includes(q)).forEach(d => { const card = document.createElement('div'); card.className = 'item-card'; card.onclick = () => { document.getElementById('mTitle').innerText = d[`t_${currentLang}`] + " (" + d.p + ")"; document.getElementById('mSummary').innerHTML = d[`s_${currentLang}`]; document.getElementById('mLinks').innerHTML = d.l.map(l => `<a href="${l.u}" target="_blank" class="action-btn">${l[`n_${currentLang}`]} ↗</a>`).join(''); document.getElementById('modal').style.display = 'block'; }; card.innerHTML = `<span class="item-page">${d.p}</span><div class="item-title">${d[`t_${currentLang}`]}</div>`; list.appendChild(card); }); }
-        function closeM(e) { if(e.target.id === 'modal') e.target.style.display = 'none'; }
-    </script>
-</body>
-</html>
+                p: "p.52-60", t_ko: "Chapter 4  AI의 미래와 확장성", t_en: "Chapter 4  Future & Scalability", 
+                subs: [
+                    { t_ko: "· 86% 비용 절감의 기적", t_en: "· 86% Cost Miracle", c_ko: "기존 아마존(AWS) 등 대형 클라우드 대비 <b>최대 86% 저렴한 비용</b>으로 AI 엔진을 공급합니다.", c_en: "Providing AI engines at <b>up to 86% lower costs</b> compared to big cloud providers like AWS." },
+                    { t_ko: "· 중앙 독재보다 안전한 분산 보안", t_en: "· Decentralized Security", c_ko: "한 곳이 해킹당하면 마비되는 시스템이 아니라, <b>수만 개의 이웃 노드</b>가 정보를 나눠 보관해 안전합니다.", c_en: "Not a system

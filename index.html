@@ -14,9 +14,10 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             background-color: var(--bg-color); color: var(--text-color);
             font-family: 'Pretendard', -apple-system, sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* 전체 스크롤 방지 */
         }
 
+        /* 헤더 고정 */
         header {
             width: 100%; height: 70px; padding: 0 30px;
             display: flex; align-items: center; justify-content: space-between;
@@ -28,16 +29,25 @@
         .lang-switch { flex: 1; display: flex; justify-content: flex-end; }
         .lang-btn { background: var(--accent-color); color: white; border: 1px solid var(--primary-color); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold; }
 
-        .main-container { display: flex; width: 100%; height: 100vh; padding-top: 70px; }
+        /* 메인 분할 컨테이너 (데스크톱 강제 50:50) */
+        .main-container {
+            display: flex; width: 100%; height: 100vh; padding-top: 70px;
+        }
 
-        /* 왼쪽 패널 (가이드 & 아코디언 리스트) */
-        .left-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; border-right: 1px solid #222; }
-        .guide-text { color: #888; font-size: 0.95rem; font-weight: 500; margin-bottom: 8px; text-align: left; }
+        /* 왼쪽 패널 (가이드) */
+        .left-panel {
+            width: 50%; height: 100%; overflow-y: auto; padding: 40px; border-right: 1px solid #222;
+        }
+        .guide-text { color: #888; font-size: 0.95rem; font-weight: 500; margin-bottom: 10px; text-align: left; }
         .search-box { margin-bottom: 30px; position: sticky; top: 0; background: var(--bg-color); z-index: 10; padding-bottom: 10px; }
-        input { width: 100%; padding: 16px 24px; border-radius: 40px; border: 1px solid var(--accent-color); background: #111; color: white; font-size: 1.1rem; outline: none; }
+        input {
+            width: 100%; padding: 16px 24px; border-radius: 40px; border: 1px solid var(--accent-color);
+            background: #111; color: white; font-size: 1.1rem; outline: none;
+        }
 
+        /* 아코디언 리스트 */
         .list-container { display: flex; flex-direction: column; gap: 15px; }
-        .accordion-item { background: var(--card-bg); border-radius: 14px; border: 1px solid #222; margin-bottom: 15px; overflow: hidden; transition: 0.3s; }
+        .accordion-item { background: var(--card-bg); border-radius: 14px; border: 1px solid #222; margin-bottom: 10px; overflow: hidden; transition: 0.3s; }
         .accordion-item:hover { border-color: var(--primary-color); }
         .accordion-header { padding: 22px; cursor: pointer; display: flex; flex-direction: column; }
         .item-page { color: var(--primary-color); font-size: 0.85rem; font-weight: bold; }
@@ -46,16 +56,26 @@
         .accordion-content { display: none; padding: 0 22px 22px 22px; border-top: 1px solid #222; background: #151515; font-size: 1rem; line-height: 1.8; color: #eee; }
         .accordion-content ul { padding-left: 0; list-style: none; margin: 15px 0; }
         .accordion-content li { margin-bottom: 10px; }
-        .action-btn { background: var(--primary-color); color: #000; padding: 10px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 800; display: block; text-align: center; margin-top: 15px; }
+        .action-btn { background: var(--primary-color); color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 800; display: block; text-align: center; margin-top: 15px; }
 
-        /* 오른쪽 패널 (표지 & 구매) */
-        .right-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; display: flex; flex-direction: column; align-items: center; background: #090909; }
-        .cover-box { width: 100%; max-width: 420px; margin-bottom: 30px; }
+        /* 오른쪽 패널 (표지 고정) */
+        .right-panel {
+            width: 50%; height: 100%; overflow-y: auto; padding: 40px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: #090909;
+        }
+        .cover-box { width: 100%; max-width: 420px; margin-bottom: 35px; }
         .cover-img { width: 100%; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); display: block; }
-        .buy-now-btn { background: var(--buy-btn-color); color: white; padding: 20px 50px; border-radius: 60px; text-decoration: none; font-size: 1.2rem; font-weight: 900; box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4); animation: pulse 2s infinite; text-align: center; }
+        .buy-now-btn {
+            background: var(--buy-btn-color); color: white; padding: 20px 50px;
+            border-radius: 60px; text-decoration: none; font-size: 1.2rem; font-weight: 900;
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4); animation: pulse 2s infinite; text-align: center;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         .footer-content { margin-top: 60px; text-align: center; opacity: 0.5; font-size: 0.8rem; line-height: 1.6; color: #aaa; }
 
+        /* 모바일 대응 (화면 좁을 때) */
         @media (max-width: 900px) {
             body, html { overflow-y: auto; }
             .main-container { flex-direction: column; height: auto; }
@@ -71,3 +91,96 @@
     <header>
         <h1 id="main-title">Aethir와 함께 미래를 선점하라</h1>
         <div class="lang-switch"><button class="lang-btn" onclick="toggleLang()">KO / EN</button></div>
+    </header>
+
+    <div class="main-container">
+        <section class="left-panel">
+            <p id="sub-guide" class="guide-text">* 챕터를 클릭하면 상세 핵심 요약이 아래에 펼쳐집니다.</p>
+            <div class="search-box">
+                <input type="text" id="q" placeholder="키워드 검색 (예: ARR, 노드, 6월)" oninput="render()">
+            </div>
+            <div id="list" class="list-container"></div>
+            
+            <div class="footer-content">
+                <p id="footer-text">
+                    <b>[비공식 커뮤니티 가이드 고지]</b><br>
+                    본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>
+                    모든 투자의 책임은 본인에게 있습니다.<br>
+                    © 2026 김지호. All Rights Reserved.
+                </p>
+            </div>
+        </section>
+
+        <section class="right-panel">
+            <div class="cover-box">
+                <img src="Aethir%20최종%20겉표지.jpg" alt="Aethir Cover" class="cover-img">
+            </div>
+            <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 종이책 구매하러 가기</a>
+        </section>
+    </div>
+
+    <script>
+        let currentLang = 'ko';
+        const i18n = {
+            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 종이책 구매하러 가기", placeholder: "키워드 검색 (예: ARR, 노드, 6월)", sub: "* 챕터를 클릭하면 상세 핵심 요약이 아래에 펼쳐집니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved." },
+            en: { title: "Seize the Future with Aethir", buy: "📙 Order Printed Book", placeholder: "Search keywords (e.g., ARR, Node)", sub: "* Click a chapter to see core summaries below.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>Investment responsibility is yours.<br>© 2026 Jiho Kim. All Rights Reserved." }
+        };
+
+        const data = [
+            { 
+                p: "p.6-11", t_ko: "들어가는 말  가치 투자 기준 3가지", t_en: "Introduction  3 Standards of Value Investing", 
+                s_ko: "<ul><li>· 1. 통찰력  대표가 현장의 고민을 꿰뚫고 있는가?</li><li>· 2. 기술력  약속을 구현할 검증된 엔진인가?</li><li>· 3. 실질 매출  세상이 필요로 하는 가치를 증명하는가?</li></ul>", 
+                s_en: "<ul><li>· 1. Insight  Does the leader understand field problems?</li><li>· 2. Tech  Proven engine that works?</li><li>· 3. Revenue  Real demand proven by ARR?</li></ul>", 
+                l: [{n_ko: "공식 X 소식", n_en: "Official X", u: "https://x.com/AethirCloud"}] 
+            },
+            { 
+                p: "p.12-30", t_ko: "Chapter 1  에이셔 작동 원리 및 성과", t_en: "Chapter 1  Principles & Results", 
+                s_ko: "<ul><li>· AI 시대의 GPU 부족 문제 해결</li><li>· Aethir를 이끄는 두 핵심 인물</li><li>· 1억 5천만 달러 규모의 ARR 달성</li><li>· 94개국에 걸친 GPU 네트워크 혁신</li></ul>", 
+                s_en: "<ul><li>· Solving GPU shortages in AI era</li><li>· Two key leaders (Mark & Daniel)</li><li>· Over $150M ARR achieved</li><li>· Global innovation in 94 countries</li></ul>", 
+                l: [{n_ko: "대시보드", n_en: "Dashboard", u: "https://dashboard.aethir.com/"}] 
+            },
+            { 
+                p: "p.31-47", t_ko: "Chapter 2  실전 투자 및 스테이킹", t_en: "Chapter 2  Investing & Staking", 
+                s_ko: "<ul><li>· X계정에 Aethir 홍보하기 (인포파이)</li><li>· 엣지 기기 투자 및 ATH 할당량 변경</li><li>· 체커노드(보안관) 운영 및 15% 보상</li><li>· 스테이킹의 모든 것 (veATH, stATH)</li></ul>", 
+                s_en: "<ul><li>· Promo on X (Infopy)</li><li>· Edge device & ATH allocation</li><li>· Checker Node ops & 15% rewards</li><li>· Staking deep dive (veATH, stATH)</li></ul>", 
+                l: [{n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"}] 
+            },
+            { 
+                p: "p.48-51", t_ko: "Chapter 3  Zentry 시너지 및 보상", t_en: "Chapter 3  Zentry Synergy & Rewards", 
+                s_ko: "<ul><li>· Aethir와 Zentry의 시너지 효과</li><li>· 홍보하고 에어드랍 받기 (Zentry Nexus)</li><li>· 스테이커를 위한 특별 혜택</li></ul>", 
+                s_en: "<ul><li>· Synergy with Zentry Gaming</li><li>· Promo & Airdrops (Nexus)</li><li>· Special rewards for Stakers</li></ul>", 
+                l: [{n_ko: "Zentry Nexus", n_en: "Zentry Nexus", u: "https://nexus.zentry.com/"}] 
+            },
+            { 
+                p: "p.52-60", t_ko: "Chapter 4  AI의 미래와 확장성", t_en: "Chapter 4  Future & Scalability", 
+                s_ko: "<ul><li>· 86% 비용 절감의 기적</li><li>· 가전 및 앱 속에 숨은 AI의 정체</li><li>· 중앙화보다 안전한 분산 보안</li></ul>", 
+                s_en: "<ul><li>· The 86% cost saving miracle</li><li>· AI hidden in gadgets & apps</li><li>· Security through decentralization</li></ul>", 
+                l: [] 
+            },
+            { 
+                p: "p.61-62", t_ko: "맺음말  미래 산업 선점", t_en: "Conclusion  Leading the Industry", 
+                s_ko: "<ul><li>· 미래 기술 흐름을 읽는 기회</li><li>· 공동 성장과 지속적인 교류</li><li>· 저자(김지호) 소통 채널</li></ul>", 
+                s_en: "<ul><li>· Opportunities in tech trends</li><li>· Growing together through exchange</li><li>· Contact the Author</li></ul>", 
+                l: [{n_ko: "저자 X", n_en: "Author X", u: "https://x.com/thejediworld77"}] 
+            }
+        ];
+
+        function toggleLang() {
+            currentLang = (currentLang === 'ko') ? 'en' : 'ko';
+            document.getElementById('main-title').innerText = i18n[currentLang].title;
+            document.getElementById('buy-btn').innerText = i18n[currentLang].buy;
+            document.getElementById('q').placeholder = i18n[currentLang].placeholder;
+            document.getElementById('sub-guide').innerText = i18n[currentLang].sub;
+            document.getElementById('footer-text').innerHTML = i18n[currentLang].footer;
+            render();
+        }
+
+        function toggleAccordion(index) {
+            const content = document.getElementById(`content-${index}`);
+            const isVisible = content.style.display === 'block';
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+            content.style.display = isVisible ? 'none' : 'block';
+        }
+
+        function render() {
+            const q =

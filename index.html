@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir Guide: Expert Insights</title>
+    <title>Aethir Guide: Artist Insight</title>
     <style>
         :root {
             --bg-color: #0d0d0d; --card-bg: #1a1a1a; --primary-color: #c1ff00;
@@ -44,8 +44,6 @@
         .acc-content { display: none; padding: 0 22px 22px 22px; border-top: 1px solid #222; background: #151515; font-size: 1rem; line-height: 1.8; color: #eee; }
         .acc-content ul { padding-left: 0; list-style: none; margin: 15px 0; }
         .acc-content li { margin-bottom: 12px; }
-        
-        /* 상세 요약 내 버튼 디자인 */
         .action-btn { background: var(--primary-color); color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 800; display: block; text-align: center; margin-top: 10px; }
 
         /* 오른쪽 패널 */
@@ -55,6 +53,7 @@
         
         .btn-group { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 12px; text-align: center; }
         .buy-now-btn { background: var(--buy-btn-color); color: white; padding: 18px; border-radius: 60px; text-decoration: none; font-size: 1.2rem; font-weight: 900; box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4); animation: pulse 2s infinite; }
+        /* AI걷는독서 버튼: Artist Insight의 우아함을 담은 디자인 */
         .health-btn { background: #222; color: var(--primary-color); padding: 15px; border-radius: 60px; text-decoration: none; font-size: 1rem; font-weight: 700; border: 1px solid var(--primary-color); }
         .promo-txt { font-size: 0.8rem; color: #777; margin-top: -5px; }
 
@@ -97,7 +96,7 @@
             </div>
             <div class="btn-group">
                 <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 Aethir 가이드 구매하기</a>
-                <a id="health-btn" href="https://www.bookk.co.kr/" target="_blank" class="health-btn">👟 투자자 필수 체력: 걷기 가이드</a>
+                <a id="health-btn" href="https://www.bookk.co.kr/" target="_blank" class="health-btn">👟 투자자 필수 체력  AI걷는독서</a>
                 <p id="promo-txt" class="promo-txt">* 24시간 깨어있는 투자자를 위한 저자의 건강 처방</p>
             </div>
         </section>
@@ -106,8 +105,8 @@
     <script>
         let currentLang = 'ko';
         const i18n = {
-            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 Aethir 가이드 구매하기", health: "👟 투자자 필수 체력: 걷기 가이드", promo: "* 24시간 깨어있는 투자자를 위한 저자의 건강 처방", sub: "* 챕터를 클릭하면 상세 핵심 요약이 아래에 펼쳐집니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved." },
-            en: { title: "Seize the Future with Aethir", buy: "📙 Buy Aethir Guide", health: "👟 For Investors: Walking Guide", promo: "* Health prescription for 24/7 crypto investors", sub: "* Click a chapter to see core summaries below.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>Investment responsibility is yours.<br>© 2026 Jiho Kim. All Rights Reserved." }
+            ko: { title: "Aethir와 함께 미래를 선점하라", buy: "📙 Aethir 가이드 구매하기", health: "👟 투자자 필수 체력  AI걷는독서", promo: "* 24시간 깨어있는 투자자를 위한 저자의 건강 처방", sub: "* 챕터를 클릭하면 상세 핵심 요약이 아래에 펼쳐집니다.", footer: "<b>[비공식 커뮤니티 가이드 고지]</b><br>본 도서 및 웹사이트는 에이셔 생태계 연구를 위한 비공식 가이드입니다.<br>모든 투자의 책임은 본인에게 있습니다.<br>© 2026 김지호. All Rights Reserved." },
+            en: { title: "Seize the Future with Aethir", buy: "📙 Buy Aethir Guide", health: "👟 For Investors  Artist Insight Walking", promo: "* Health prescription for 24/7 crypto investors", sub: "* Click a chapter to see core summaries below.", footer: "<b>[Unofficial Community Guide Disclaimer]</b><br>This is an unofficial study guide for the Aethir ecosystem.<br>Investment responsibility is yours.<br>© 2026 Jiho Kim. All Rights Reserved." }
         };
 
         const data = [
@@ -120,13 +119,13 @@
             { 
                 p: "p.12-30", t_ko: "Chapter 1  에이셔 작동 원리 및 성과", t_en: "Chapter 1  Principles & Results", 
                 s_ko: "<ul><li>· AI 시대의 GPU 부족 문제 해결</li><li>· Aethir를 이끄는 두 핵심 인물</li><li>· 1억 5천만 달러 규모의 ARR 달성</li><li>· 94개국 글로벌 GPU 네트워크 혁신</li></ul>", 
-                s_en: "<ul><li>· Solving GPU shortages in AI era</li><li>· Two key leaders (Mark & Daniel)</li><li>· Over $150M ARR achieved</li><li>· Global innovation in 94 countries</li></ul>", 
+                s_en: "<ul><li>· Solving GPU shortages in AI era</li><li>· Two key leaders (Mark & Daniel)</li><li>· $150M+ ARR milestone achieved</li><li>· Global GPU network in 94 countries</li></ul>", 
                 l: [{n_ko: "실시간 대시보드", n_en: "Live Dashboard", u: "https://dashboard.aethir.com/"}] 
             },
             { 
                 p: "p.31-47", t_ko: "Chapter 2  실전 투자 및 스테이킹", t_en: "Chapter 2  Investing & Staking", 
                 s_ko: "<ul><li>· X계정에 Aethir 홍보하기 (인포파이)</li><li>· 엣지 기기 투자 및 ATH 할당량 변경</li><li>· 체커노드(보안관) 운영 및 15% 보상</li><li>· 스테이킹의 모든 것 (veATH, stATH)</li></ul>", 
-                s_en: "<ul><li>· Promo on X (Infopy)</li><li>· Checker Node ops & 15% rewards</li><li>· Staking deep dive (veATH, stATH)</li><li>· Restaking utility for ATH tokens</li></ul>", 
+                s_en: "<ul><li>· Promo on X (Infopy)</li><li>· Checker Node ops & 15% rewards</li><li>· Staking deep dive (veATH, stATH)</li></ul>", 
                 l: [
                     {n_ko: "노드 가이드", n_en: "Node Guide", u: "https://docs.aethir.com/checker-guide"},
                     {n_ko: "Aethir Korea X 정식계정", n_en: "Aethir Korea X Official", u: "https://x.com/Aethir_Korea"}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir Guide: Expert Insights</title>
+    <title>Aethir Guide: Artist Insight</title>
     <style>
         :root {
             --bg-color: #0d0d0d; --card-bg: #1a1a1a; --primary-color: #c1ff00;
@@ -17,7 +17,6 @@
             overflow: hidden;
         }
 
-        /* 상단 헤더 */
         header {
             width: 100%; height: 70px; padding: 0 30px;
             display: flex; align-items: center; justify-content: space-between;
@@ -29,10 +28,9 @@
         .lang-switch { flex: 1; display: flex; justify-content: flex-end; }
         .lang-btn { background: var(--accent-color); color: white; border: 1px solid var(--primary-color); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold; }
 
-        /* 메인 분할 레이아웃 (데스크톱 50:50) */
         .main-container { display: flex; width: 100%; height: 100vh; padding-top: 70px; }
 
-        /* 왼쪽 패널 (가이드 & 아코디언) */
+        /* 왼쪽 패널 */
         .left-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; border-right: 1px solid #222; }
         .guide-text { color: #888; font-size: 0.95rem; font-weight: 500; margin-bottom: 25px; text-align: left; border-left: 4px solid var(--primary-color); padding-left: 12px; }
 
@@ -48,7 +46,7 @@
         .acc-content li { margin-bottom: 12px; }
         .action-btn { background: var(--primary-color); color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 800; display: block; text-align: center; margin-top: 10px; }
 
-        /* 오른쪽 패널 (새 표지 & 버튼 그룹) */
+        /* 오른쪽 패널 (cover.jpg 적용) */
         .right-panel { width: 50%; height: 100%; overflow-y: auto; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #090909; }
         .cover-box { width: 100%; max-width: 420px; margin-bottom: 30px; }
         .cover-img { width: 100%; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); display: block; }
@@ -61,7 +59,6 @@
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         .footer-content { margin-top: 60px; text-align: center; opacity: 0.5; font-size: 0.8rem; line-height: 1.6; color: #aaa; }
 
-        /* 모바일 대응 */
         @media (max-width: 900px) {
             body, html { overflow-y: auto; }
             .main-container { flex-direction: column; height: auto; }
@@ -94,7 +91,7 @@
 
         <section class="right-panel">
             <div class="cover-box">
-                <img src="Aethir%20전자책%20겉표지.jpg" alt="Aethir New Cover" class="cover-img">
+                <img src="cover.jpg" alt="Aethir Book Cover" class="cover-img">
             </div>
             <div class="btn-group">
                 <a id="buy-btn" href="https://www.bookk.co.kr/" target="_blank" class="buy-now-btn">📙 Aethir 가이드 구매하기</a>
@@ -121,7 +118,7 @@
             { 
                 p: "p.12-30", t_ko: "Chapter 1  에이셔 작동 원리 및 성과", t_en: "Chapter 1  Principles & Results", 
                 s_ko: "<ul><li>· AI 시대의 GPU 부족 문제 해결</li><li>· Aethir를 이끄는 두 핵심 인물</li><li>· 1억 5천만 달러 규모의 ARR 달성</li><li>· 94개국 글로벌 GPU 네트워크 혁신</li></ul>", 
-                s_en: "<ul><li>· Solving GPU shortages in AI era</li><li>· Two key leaders (Mark & Daniel)</li><li>· $150M+ ARR milestone achieved</li><li>· Global GPU network in 94 countries</li></ul>", 
+                s_en: "<ul><li>· Solving GPU shortages in AI era</li><li>· Two key leaders (Mark & Daniel)</li><li>· Over $150M ARR achieved</li><li>· Global innovation in 94 countries</li></ul>", 
                 l: [{n_ko: "실시간 대시보드", n_en: "Live Dashboard", u: "https://dashboard.aethir.com/"}] 
             },
             { 

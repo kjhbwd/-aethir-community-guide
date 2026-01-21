@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aethir Guide: Expert Insights</title>
+    <title>Aethir Guide: Artist Insight</title>
     <style>
         :root {
             --bg-color: #0d0d0d; --card-bg: #1a1a1a; --primary-color: #c1ff00;
@@ -30,7 +30,6 @@
 
         .main-container { display: flex; width: 100%; height: 100vh; padding-top: 70px; }
 
-        /* 왼쪽 패널 (목차) */
         .left-panel { width: 50%; min-width: 320px; height: 100%; overflow-y: auto; padding: 40px; border-right: 1px solid #222; background: var(--bg-color); }
         .guide-text { color: #888; font-size: 0.95rem; font-weight: 500; margin-bottom: 25px; text-align: left; border-left: 4px solid var(--primary-color); padding-left: 12px; }
 
@@ -46,7 +45,6 @@
         .acc-content li { margin-bottom: 10px; }
         .action-btn { background: var(--primary-color); color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 800; display: block; text-align: center; margin-top: 10px; }
 
-        /* 오른쪽 패널 (표지 및 버튼) */
         .right-panel { width: 50%; min-width: 320px; height: 100%; overflow-y: auto; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #090909; }
         .cover-box { width: 100%; max-width: 420px; margin-bottom: 30px; transition: 0.3s; cursor: pointer; }
         .cover-box:hover { transform: scale(1.02); }
@@ -91,12 +89,12 @@
         </section>
 
         <section class="right-panel">
-            <div class="cover-box" onclick="window.open('https://bookk.co.kr/search?keywords=Ai%EA%B1%B7%EB%8A%94%EB%8F%85%EC%84%9C', '_blank')">
+            <div class="cover-box" onclick="window.open('https://bookk.co.kr/bookStore/679c4666f3250118b2b1a755', '_blank')">
                 <img src="cover.jpg" alt="Aethir Book Cover" class="cover-img">
             </div>
             <div class="btn-group">
                 <a id="buy-btn" href="https://bookk.co.kr/bookStore/69675cd000093a7b3b1b51fc" target="_blank" class="buy-now-btn">📙 Aethir 가이드 구매하기</a>
-                <a id="health-btn" href="https://bookk.co.kr/search?keywords=Ai%EA%B1%B7%EB%8A%94%EB%8F%85%EC%84%9C" target="_blank" class="health-btn">👟 투자자 필수 체력  AI걷는독서</a>
+                <a id="health-btn" href="https://bookk.co.kr/bookStore/679c4666f3250118b2b1a755" target="_blank" class="health-btn">👟 투자자 필수 체력  AI걷는독서</a>
                 <p id="promo-txt" class="promo-txt">* 24시간 깨어있는 투자자를 위한 저자의 건강 처방</p>
             </div>
         </section>
